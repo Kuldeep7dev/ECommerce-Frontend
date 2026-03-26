@@ -24,6 +24,7 @@ import SignUp from './Pages/DashPages/SignUp'
 import ViewUsers from './Pages/DashPages/ViewUsers'
 import ViewContact from './Pages/DashPages/ViewContact'
 import Login from './Pages/DashPages/Login'
+import ProtectedRoute from './Component/ProtectedRoute'
 
 
 function App() {
@@ -36,21 +37,22 @@ function App() {
         <Routes location={location} key={location.pathname}>
 
           {/* 🔒 ADMIN ROUTES */}
-          <Route element={<AdminLayout />}>
-            <Route path="/adminpanel" element={<AdminPanel />} />
-            <Route path="/products" element={<Products />} />
-            <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/users' element={<Users />} />
+          <Route element={<ProtectedRoute />}>
+            <Route element={<AdminLayout />}>
+              <Route path="/adminpanel" element={<AdminPanel />} />
+              <Route path="/products" element={<Products />} />
+              <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/users' element={<Users />} />
 
-            <Route path='/contact/:id' element={<ViewContact />} />
-            <Route path="/contact" element={<Contact />} />
+              <Route path='/contact/:id' element={<ViewContact />} />
+              <Route path="/contact" element={<Contact />} />
 
-            <Route path='/products/:slug/update' element={<UpdateProduct />} />
-            <Route path="/products/:slug/view" element={<ViewProduct />} />
-            <Route path='/upload' element={<ProductUpload />} />
+              <Route path='/products/:slug/update' element={<UpdateProduct />} />
+              <Route path="/products/:slug/view" element={<ViewProduct />} />
+              <Route path='/upload' element={<ProductUpload />} />
 
-            <Route path='/users/create' element={<SignUp />} />
-            <Route path='/users/:id' element={<ViewUsers />} />
+              <Route path='/users/:id' element={<ViewUsers />} />
+            </Route>
           </Route>
           {/* <Route element={<AdminRoute />}>
             <Route element={<AdminLayout />}> */}
@@ -58,11 +60,12 @@ function App() {
               <Route path='/orders' element={<Orders />} />
               <Route path='/contact' element={<Contact />} />
               <Route path='/profile' element={<Profile />} />
-
+              
               <Route path='/products' element={<Products />} />
               <Route /> */}
           {/* </Route>
           </Route> */}
+          <Route path='/users/create' element={<SignUp />} />
 
           {/* 🌍 PUBLIC */}
           <Route element={<WebLayout />}>

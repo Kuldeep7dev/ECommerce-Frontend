@@ -136,7 +136,7 @@ const SignUp = () => {
             <div className="md:col-span-2">
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-200"
+                className="w-full bg-secondary text-primary py-3 rounded-lg font-medium hover:bg-primary hover:text-secondary cursor-pointer hover:border transition duration-200"
               >
                 Create User
               </button>

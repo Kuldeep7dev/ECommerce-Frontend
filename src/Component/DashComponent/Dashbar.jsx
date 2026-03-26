@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-// import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
-// import axiosInstance from "../../../Config/axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 import { Bell, BellRing, Clock12 } from "lucide-react";
 import axiosInstance from "../../Config/AxiosInstance";
 import { timeAgo } from "../../Utils/time";
 
 const Dashbar = () => {
-  // const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
@@ -56,11 +55,17 @@ const Dashbar = () => {
   /* ================= Logout ================= */
   const handleLogout = async () => {
     try {
-      await axiosInstance.post("/auth/logout");
+      await logout();
       navigate("/login");
+      toast.success("Logged out successfully");
     } catch (error) {
       toast.error("Logout failed ❌");
     }
+  };
+
+  const getFirstLetter = (name) => {
+      if (!name) return "U";
+      return name.charAt(0).toUpperCase();
   };
 
   return (
@@ -103,10 +108,6 @@ const Dashbar = () => {
                           <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-sm font-semibold">
                             {item.name?.charAt(0)?.toUpperCase() || "U"}
                           </div>
-
-                          {/* <span className="absolute -top-1 -right-1 bg-white rounded-full p-1 shadow">
-                          <Clock12 size={12} className="text-gray-500" />
-                        </span> */}
                         </div>
 
                         {/* Content */}
@@ -151,13 +152,13 @@ const Dashbar = () => {
               className="flex items-center gap-3 cursor-pointer p-1.5"
             >
               <div className="border p-2 rounded-full w-9 h-9 flex justify-center items-center">
-                {/* {getFirstLetter(user?.fullName)} */}
+                {getFirstLetter(user?.fullName || user?.name || user?.email)}
               </div>
 
               <div>
-                {/* <p className="text-xs tracking-wider">{user?.fullName}</p> */}
+                <p className="text-xs tracking-wider">{user?.fullName || user?.name}</p>
                 <span className="text-[10px] tracking-wider capitalize">
-                  {/* {user?.role} */}
+                  {user?.role || "Admin"}
                 </span>
               </div>
             </div>
