@@ -1,6 +1,6 @@
 import axiosInstance from "../Config/AxiosInstance";
 
-const ASSETS_API = "/upload-file";
+const ASSETS_API = "/uploadimage";
 
 /*
 Allowed folders to prevent misuse
@@ -27,7 +27,7 @@ export const textToSlug = (text) => {
 /*
 UPLOAD FILE
 */
-export const uploadFile = async (file, folder = "products", userPrefix = "file") => {
+export const uploadFile = async (file, folder , userPrefix = "file") => {
     try {
 
         if (!file) {

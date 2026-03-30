@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../Config/AxiosInstance';
 import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
+import { showError } from '../../Utils/toaster';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    
+
     const navigate = useNavigate();
     const { login } = useAuth();
 
@@ -17,13 +18,11 @@ const Login = () => {
         setLoading(true);
         try {
             // Adjust the endpoint if necessary based on your Node.js backend
-            const res = await axiosInstance.post('/auth/login', { email, password });
-            
-            // Pass the user data to context
+            const res = await axiosInstance.post('/authenticate/login', { email, password });
+
             login(res.data.user);
             toast.success('Login successful! Welcome back.');
-            
-            // Redirect to dashboard or previous protected route
+
             navigate('/dashboard');
         } catch (error) {
             console.error('Login error:', error);
@@ -34,8 +33,8 @@ const Login = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-50">
-            <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <div className="flex justify-center items-center min-h-screen bg-primary">
+            <div className="bg-primary p-8 rounded-xl border shadow-lg w-full max-w-md">
                 <h2 className="text-2xl font-bold mb-6 text-center text-primary">Admin Login</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div>

@@ -1,8 +1,10 @@
 import React from 'react'
 import BreadCrumb from '../../Component/BreadCrumb';
+import { useAuth } from '../../context/AuthContext';
 
 
 const Dashboard = () => {
+  const { user } = useAuth()
 
   const breadcrumbItems = [
   ];
@@ -13,7 +15,7 @@ const Dashboard = () => {
       </div>
 
       <div>
-        <h1>Welcome, Kuldeep</h1>
+        <h1>Welcome, {user?.fullName}</h1>
       </div>
     </div>
   )

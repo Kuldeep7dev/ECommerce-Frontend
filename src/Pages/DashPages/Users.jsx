@@ -13,9 +13,8 @@ const Users = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axiosInstance.get('/auth/signup');
-      console.log(res.data.user);
-      setData(res.data.user)
+      const res = await axiosInstance.get('/auth');
+      setData(res.data.user);
     } catch (error) {
       console.log("Server error while you get users")
     }
@@ -57,6 +56,10 @@ const Users = () => {
         </div>
       </div>
 
+      {data.length === 0 && (
+        <p>couldn't Find the user</p>
+      )}
+
       <div className="mt-5 overflow-hidden rounded-lg border-2 border-gray-300">
         <table className="w-full">
           <thead className="bg-primary text-secondary">
@@ -93,7 +96,7 @@ const Users = () => {
                       <Eye size={20} />
                     </Link>
 
-                    <Link className="p-2 rounded-xl border-2 bg-accent text-white hover:bg-white hover:text-accent hover:border-accent transition-all">
+                    <Link to={`/users/${users._id}/update`} className="p-2 rounded-xl border-2 bg-accent text-white hover:bg-white hover:text-accent hover:border-accent transition-all">
                       <Pencil size={20} />
                     </Link>
 

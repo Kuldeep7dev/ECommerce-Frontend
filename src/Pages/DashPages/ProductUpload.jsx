@@ -4,6 +4,7 @@ import BreadCrumb from "../../Component/BreadCrumb";
 import { showError } from "../../Utils/toaster";
 import axiosInstance from "../../Config/AxiosInstance";
 import { useNavigate } from "react-router-dom";
+import uploadFile from "../../Utils/uploadFile";
 
 const ProductUpload = () => {
   const navigate = useNavigate();
@@ -81,9 +82,35 @@ const ProductUpload = () => {
       return showError("Please add at least one colour");
     }
 
-    try {
+    let uploadedImagesUrls = [];
+    const validImages = images.filter((img) => img !== null);
 
-      const res = await axiosInstance.post("/product", data);
+    if (validImages.length === 0) {
+      return showError("Please upload at least one image");
+    }
+
+    try {
+      for (const file of validImages) {
+        const upload = await uploadFile(file, "products");
+        if (upload.success) {
+          uploadedImagesUrls.push(upload.fileName);
+        } else {
+          return showError(upload.error || "Failed to upload image");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      return showError("Error uploading images");
+    }
+
+    try {
+      const payload = {
+        ...data,
+        image: uploadedImagesUrls,
+        brand: data.brand.trim().toUpperCase()
+      };
+
+      const res = await axiosInstance.post("/product", payload);
 
       console.log(res.data);
       navigate("/Products");
@@ -163,15 +190,15 @@ const ProductUpload = () => {
                 className="w-full border rounded-md px-3 py-2 mt-1 outline-none"
               >
                 <option value="">Select category</option>
-                <option value="men">MEN</option>
-                <option value="woman">WOMEN</option>
-                <option value="children">CHILDREN</option>
+                <option value="MEN">MEN</option>
+                <option value="WOMEN">WOMEN</option>
+                <option value="CHILDREN">CHILDREN</option>
               </select>
             </div>
 
             <div className="text-sm font-medium">
               <label>Brand</label>
-              <div className="flex items-center border rounded-md px-3 py-2 mt-1 w-[74rem]">
+              <div className="flex items-center border rounded-md px-3 py-2 mt-1 w-full">
                 <span>
                   <AtSign size={18} className="text-gray-500 mr-2" />
                 </span>

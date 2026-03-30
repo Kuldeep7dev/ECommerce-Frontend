@@ -44,7 +44,7 @@ const ViewUsers = () => {
 
     const BreadCrumItems = [
         { title: "Users", link: "/users" },
-        { title: data.fullName }
+        { title: data.fullName, link: ""}
     ]
     return (
         <div className='py-6 px-2'>

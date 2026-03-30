@@ -25,6 +25,9 @@ import ViewUsers from './Pages/DashPages/ViewUsers'
 import ViewContact from './Pages/DashPages/ViewContact'
 import Login from './Pages/DashPages/Login'
 import ProtectedRoute from './Component/ProtectedRoute'
+import UpdateUsers from './Pages/DashPages/UpdateUsers'
+import UserSignUp from './Pages/UserSignUp'
+import UserLogin from './Pages/UserLogin'
 
 
 function App() {
@@ -52,6 +55,8 @@ function App() {
               <Route path='/upload' element={<ProductUpload />} />
 
               <Route path='/users/:id' element={<ViewUsers />} />
+              <Route path='/users/:id/update' element={<UpdateUsers />} />
+              <Route path='/users/create' element={<SignUp />} />
             </Route>
           </Route>
           {/* <Route element={<AdminRoute />}>
@@ -65,7 +70,6 @@ function App() {
               <Route /> */}
           {/* </Route>
           </Route> */}
-          <Route path='/users/create' element={<SignUp />} />
 
           {/* 🌍 PUBLIC */}
           <Route element={<WebLayout />}>
@@ -80,7 +84,8 @@ function App() {
           </Route>
 
           <Route path='/login' element={<Login />} />
-          {/* <Route path='/signup' element={<SignUp />} /> */}
+          <Route path='/user/signup' element={<UserSignUp />} />
+          <Route path='/user/login' element={<UserLogin />} />
           <Route path='*' element={<NotFound />} />
 
         </Routes>

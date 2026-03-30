@@ -1,11 +1,12 @@
-import { Heart, Search, ShoppingBasket, User } from 'lucide-react'
+import { Heart, LogIn, Search, ShoppingBasket, User } from 'lucide-react'
 import React, { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { CATEGORY } from '../CONSTENT/product';
+import { CATEGORY } from '../Constent/product';
+import { useAuth } from '../context/AuthContext'
 
 const Navbar = () => {
-    const navigate = useNavigate();
     const [account, setAccount] = useState(false);
+    const { user, isAuthenticated, logout, } = useAuth();
 
     const navLinkClass = ({ isActive }) =>
         `p-2 tracking-widest font-bold transition-colors duration-200 hover:text-accent ${isActive ? 'text-green-500' : ''
@@ -14,7 +15,6 @@ const Navbar = () => {
     const iconLinkClass = ({ isActive }) =>
         `p-2 transition-colors duration-200 hover:text-accent ${isActive ? 'text-green-500' : ''
         }`
-
 
     return (
         <div>
@@ -54,8 +54,24 @@ const Navbar = () => {
             </nav>
             <div className='absolute top-18 left-[80%] w-25'>
                 {account && (
-                    <div className="absolute border right-0 mt-3 bg-secondary text-black shadow-lg rounded-lg p-3 w-40 flex flex-col gap-2 z-50">
-                        <button className='border'>Login</button>
+                    <div className="absolute border right-0 mt-3 bg-secondary text-black shadow-lg rounded-lg p-3 flex gap-2 z-50">
+                        {isAuthenticated ? (
+                            <>
+                                <p className="text-sm text-primary font-semibold">{user?.fullName}</p>
+
+                                <button
+                                    onClick={logout}
+                                    className="border text-secondary bg-primary rounded-sm p-2 cursor-pointer"
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <Link to="/user/signup" className='border text-secondary bg-primary rounded-sm p-2 flex justify-center items-center gap-1 cursor-pointer w-20'>SignUp</Link>
+                                <Link to="/user/login" className='border text-secondary bg-primary rounded-sm p-2 flex justify-center items-center gap-1 cursor-pointer w-20'>Login</Link>
+                            </>
+                        )}
                     </div>
                 )}
             </div>

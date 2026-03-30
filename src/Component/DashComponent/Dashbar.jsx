@@ -22,7 +22,7 @@ const Dashbar = () => {
       const res = await axiosInstance.get('/Notification');
       setData(res.data.notifications);
     } catch (error) {
-
+      console.log(error)
     }
   }
 
@@ -64,8 +64,8 @@ const Dashbar = () => {
   };
 
   const getFirstLetter = (name) => {
-      if (!name) return "U";
-      return name.charAt(0).toUpperCase();
+    if (!name) return "U";
+    return name.charAt(0).toUpperCase();
   };
 
   return (
@@ -97,6 +97,9 @@ const Dashbar = () => {
                 <hr className="my-2" />
 
                 {/* List */}
+                {data.length === 0 && (
+                  <p className="p-3 text-[11px] mb-1 flex justify-center">Here is nothing notification's</p>
+                )}
                 <ul className="max-h-64 overflow-y-auto">
                   {data.map((item, idx) => (
                     <Link to={`/contact/${item._id}`} key={item._id || idx}>
