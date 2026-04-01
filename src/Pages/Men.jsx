@@ -3,37 +3,79 @@ import { Link } from "react-router-dom";
 import Pages from "../Component/Global/Pages";
 import axiosInstance from "../Config/AxiosInstance";
 import { CATEGORY } from "../Constent/product";
+import { Search } from "lucide-react";
 
 const Men = () => {
   const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // 🔥 Debounce logic
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [search]);
 
   const fetchdata = async () => {
     try {
-      const res = await axiosInstance.get(`/product?type=${CATEGORY.MEN}`);
+      setLoading(true);
+
+      let url = `/product?type=${CATEGORY.MEN}`;
+
+      if (debouncedSearch.trim() !== "") {
+        url += `&q=${debouncedSearch}`;
+      }
+
+      const res = await axiosInstance.get(url);
       setData(res.data.product);
-      console.log(res.data.product);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchdata();
-  }, []);
+  }, [debouncedSearch]);
 
   return (
     <Pages>
-      <div className="px-6 py-50">
-        {data.length === 0 && (
+      {/* SEARCH BAR */}
+      <div className="flex items-center gap-2 border w-100 p-2 mt-20 ml-10 rounded-xl">
+        <Search size={18} />
+        <input
+          type="text"
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="outline-0 w-93"
+        />
+      </div>
+
+      <div className="px-6 py-25">
+        {/* LOADING */}
+        {loading && (
+          <p className="text-center text-gray-500">Loading...</p>
+        )}
+
+        {/* EMPTY */}
+        {!loading && data.length === 0 && (
           <p className="text-center text-gray-500">
             No data product are available
           </p>
         )}
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {/* GRID */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mx-3">
           {data.map((pro) => (
             <Link to={`/product/${pro.slug}`} key={pro._id}>
               <div className="group rounded-2xl overflow-hidden border transition duration-300 cursor-pointer">
+
                 {/* IMAGE */}
                 <div className="overflow-hidden">
                   <img
@@ -49,7 +91,9 @@ const Men = () => {
                     {pro.productName}
                   </h2>
 
-                  <p className="text-sm text-gray-500 mt-1">Stock: {pro.stock}</p>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Stock: {pro.stock}
+                  </p>
 
                   <div className="flex items-center justify-between mt-2">
                     <p className="text-lg font-bold">₹{pro.price}.00</p>
@@ -65,6 +109,7 @@ const Men = () => {
                     ))}
                   </div>
                 </div>
+
               </div>
             </Link>
           ))}

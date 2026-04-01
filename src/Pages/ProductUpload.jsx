@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Package, Layers, Upload, IndianRupee } from "lucide-react";
-import axiosInstance from "../../Config/axiosConfig";
+import axiosInstance from "../../Config/AxiosInstance";
 import toast from "react-hot-toast";
 
-import { uploadImage } from "../../Utils/UploadImage";
+import { uploadFile } from "../../Utils/uploadFile";
 
 const CATEGORY = {
   MEN: "MEN",
@@ -102,7 +102,7 @@ const ProductUpload = () => {
       let uploadedImages = [];
 
       for (let i = 0; i < validImages.length; i++) {
-        const res = await uploadImage(
+        const res = await uploadFile(
           validImages[i],
           "products",
           product.productName + "-" + i,

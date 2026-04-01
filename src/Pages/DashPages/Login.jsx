@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../Config/AxiosInstance';
 import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
-import { showError } from '../../Utils/toaster';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -44,7 +43,7 @@ const Login = () => {
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                            className="w-full px-4 py-2 border border-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                             placeholder="admin@example.com"
                         />
                     </div>
@@ -55,7 +54,7 @@ const Login = () => {
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                            className="w-full px-4 py-2 border border-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                             placeholder="••••••••"
                         />
                     </div>

@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../Config/AxiosInstance";
 import BreadCrumb from "../../Component/BreadCrumb";
+import { uploadFile } from "../../Utils/uploadFile";
 
 const CATEGORY = {
   MEN: "MEN",
@@ -147,19 +148,26 @@ const UpdateProduct = () => {
 
     try {
       let uploadedImages = [...existingImages];
-      const validImages = images.filter(Boolean);
 
-      if (validImages.length > 0) {
-        const uploads = await Promise.all(
-          validImages.map((file, i) =>
-            uploadImage(file, "products", product.productName + "-" + i),
-          ),
-        );
+      for (let i = 0; i < images.length; i++) {
+        const file = images[i];
+        if (file) {
+          const res = await uploadFile(
+            file,
+            "products",
+            product.productName + "-" + i
+          );
 
-        uploads.forEach((r) => {
-          if (r.success) uploadedImages.push(r.fileName);
-        });
+          if (!res.success) {
+            setLoading(false);
+            return toastError(`Image ${i + 1} upload failed`);
+          }
+
+          uploadedImages[i] = res.fileName;
+        }
       }
+
+      uploadedImages = uploadedImages.filter(Boolean);
 
       await axiosInstance.put(`/product/${slug}`, {
         productName: product.productName,

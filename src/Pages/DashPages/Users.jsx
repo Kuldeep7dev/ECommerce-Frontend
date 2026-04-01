@@ -60,34 +60,34 @@ const Users = () => {
         <p>couldn't Find the user</p>
       )}
 
-      <div className="mt-5 overflow-hidden rounded-lg border-2 border-gray-300">
+      <div className="mt-5 overflow-hidden rounded-lg border-2 border-secondary bg-secondary">
         <table className="w-full">
-          <thead className="bg-primary text-secondary">
+          <thead className="bg-secondary text-primary">
             <tr>
-              <th className="p-2 border-2 border-gray-300">
+              <th className="p-2 border-2 border-secondary">
                 <div className="flex justify-center">
                   <Hash size={16} />
                 </div>
               </th>
-              <th className="p-2 border-2 border-gray-300">Name</th>
-              <th className="p-2 border-2 border-gray-300">Email</th>
-              <th className="p-2 border-2 border-gray-300">Phone Number</th>
-              <th className="p-2 border-2 border-gray-300">Role</th>
-              <th className="p-2 border-2 border-gray-300">Action</th>
+              <th className="p-2 border-2 border-secondary">Name</th>
+              <th className="p-2 border-2 border-secondary">Email</th>
+              <th className="p-2 border-2 border-secondary">Phone Number</th>
+              <th className="p-2 border-2 border-secondary">Role</th>
+              <th className="p-2 border-2 border-secondary">Action</th>
             </tr>
           </thead>
 
           <tbody>
             {data.map((users, index) => (
-              <tr key={users._id} className="text-center">
-                <td className="p-3 border-2 border-gray-300">{index + 1}</td>
-                <td className="p-3 border-2 border-gray-300">{users.fullName}</td>
-                <td className="p-3 border-2 border-gray-300">{users.email}</td>
-                <td className="p-3 border-2 border-gray-300">{users.phoneNumber}</td>
-                <td className="p-3 border-2 border-gray-300 capitalize">
+              <tr key={users._id} className="text-center text-primary">
+                <td className="p-3 border-2 border-secondary">{index + 1}</td>
+                <td className="p-3 border-2 border-secondary">{users.fullName}</td>
+                <td className="p-3 border-2 border-secondary">{users.email}</td>
+                <td className="p-3 border-2 border-secondary">{users.phoneNumber}</td>
+                <td className="p-3 border-2 border-secondary capitalize">
                   {users.role}
                 </td>
-                <td className="p-3 border-2 border-gray-300">
+                <td className="p-3 border-2 border-secondary">
                   <div className="flex justify-center items-center gap-2">
                     <Link
                       to={`/users/${users._id}`}

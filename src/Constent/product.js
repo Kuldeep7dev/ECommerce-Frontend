@@ -1,5 +1,5 @@
 export const CATEGORY = {
-    MEN: 'Men',
-    WOMEN: 'Women',
-    CHILDREN: 'Children'
+    MEN: 'MEN',
+    WOMEN: 'WOMEN',
+    CHILDREN: 'CHILDREN'
 };

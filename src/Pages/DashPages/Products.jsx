@@ -136,7 +136,7 @@ const Products = () => {
                   </td>
 
                   <td className="p-3 border">{item.productName}</td>
-                  <td className="p-3 border">₹{item.price}</td>
+                  <td className="p-3 border">₹{item.price}.00</td>
                   <td className='p-3 border'>{item.category}</td>
                   <td className="p-3 border">{item.stock}</td>
 

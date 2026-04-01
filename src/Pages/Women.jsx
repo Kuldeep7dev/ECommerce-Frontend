@@ -3,33 +3,73 @@ import { Link } from "react-router";
 import Pages from "../Component/Global/Pages";
 import axiosInstance from "../Config/AxiosInstance";
 import { CATEGORY } from "../Constent/product";
+import { Search } from "lucide-react";
 
 const Women = () => {
   const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const fetchdata = async () => {
     try {
-      const res = await axiosInstance.get(`/product?type=${CATEGORY.WOMEN}`);
+      setLoading(true);
+
+      let url = `/product?type=${CATEGORY.WOMEN}`;
+
+      if (debouncedSearch.trim() !== "") {
+        url += `&q=${debouncedSearch}`;
+      }
+
+      const res = await axiosInstance.get(url);
       setData(res.data.product);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchdata();
+  }, [debouncedSearch]);
 
   useEffect(() => {
     fetchdata();
   }, []);
   return (
     <Pages>
-      <div className="flex justify-center items-center h-screen">
-        {data.length === 0 && (
-          <p className="text-primary">No data product are available</p>
+      {/* SEARCH BAR */}
+      <div className="flex items-center gap-2 border w-100 p-2 mt-20 ml-10 rounded-xl">
+        <Search size={18} />
+        <input
+          type="text"
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="outline-0 w-93"
+        />
+      </div>
+
+      <div className="px-6 py-25">
+        {/* LOADING */}
+        {loading && (
+          <p className="text-center text-gray-500">Loading...</p>
         )}
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {/* EMPTY */}
+        {!loading && data.length === 0 && (
+          <p className="text-center text-gray-500">
+            No data product are available
+          </p>
+        )}
+
+        {/* GRID */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mx-3">
           {data.map((pro) => (
             <Link to={`/product/${pro.slug}`} key={pro._id}>
               <div className="group rounded-2xl overflow-hidden border transition duration-300 cursor-pointer">
+
                 {/* IMAGE */}
                 <div className="overflow-hidden">
                   <img
@@ -63,6 +103,7 @@ const Women = () => {
                     ))}
                   </div>
                 </div>
+
               </div>
             </Link>
           ))}

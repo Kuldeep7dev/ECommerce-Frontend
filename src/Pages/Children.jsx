@@ -2,25 +2,72 @@ import React, { useEffect, useState } from "react";
 import { CATEGORY } from "../Constent/product";
 import axiosInstance from "../Config/AxiosInstance";
 import Pages from "../Component/Global/Pages";
+import { Link } from "react-router-dom";
+import { Search } from "lucide-react";
 
 const Children = () => {
   const [data, setData] = useState([]);
-  const fetchChildren = async () => {
+  const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+
+  const fetchdata = async () => {
     try {
-      const res = await axiosInstance.get(`/product?type=${CATEGORY.CHILDREN}`);
-      console.log(res.data.product);
+      setLoading(true);
+
+      let url = `/product?type=${CATEGORY.CHILDREN}`;
+
+      if (debouncedSearch.trim() !== "") {
+        url += `&q=${debouncedSearch}`;
+      }
+
+      const res = await axiosInstance.get(url);
       setData(res.data.product);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchChildren();
+    fetchdata();
   }, []);
   return (
     <Pages>
-      <div className="flex justify-center items-center h-screen">
+
+
+      <div className="flex items-center gap-2 border w-100 p-2 mt-20 ml-10 rounded-xl">
+        <Search size={18} />
+        <input
+          type="text"
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="outline-0 w-93"
+        />
+      </div>
+
+
+      {loading && (
+        <p className="text-center text-gray-500 flex justify-center items-center h-[60vh]">Loading...</p>
+      )}
+
+      {/* EMPTY */}
+      {!loading && data.length === 0 && (
+        <p className="text-center text-gray-500 flex justify-center items-center h-[60vh]">
+          No data product are available
+        </p>
+      )}
+      <div className="flex justify-center items-center ">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {data.map((pro) => (
             <Link to={`/product/${pro.slug}`} key={pro._id}>
