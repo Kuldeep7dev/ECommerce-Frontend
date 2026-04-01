@@ -5,10 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { Bell, BellRing, Clock12 } from "lucide-react";
 import axiosInstance from "../../Config/AxiosInstance";
 import { timeAgo } from "../../Utils/time";
+import AdminProfile from "../../Pages/DashPages/AdminProfile";
 
 const Dashbar = () => {
   const { user, logout } = useAuth();
   const [data, setData] = useState([]);
+  const [adminProfileOpen, setAdminProfileOpen] = useState(false);
   const navigate = useNavigate();
 
   const [profileOpen, setProfileOpen] = useState(false);
@@ -149,7 +151,7 @@ const Dashbar = () => {
           <div className="border border-primary h-9"></div>
 
           {/* ================= Profile ================= */}
-          <div ref={profileRef} className="relative select-none">
+          <div ref={profileRef} className="relative select-none flex flex-col">
             <div
               onClick={() => setProfileOpen((prev) => !prev)}
               className="flex items-center gap-3 cursor-pointer p-1.5"
@@ -168,12 +170,12 @@ const Dashbar = () => {
 
             {profileOpen && (
               <div className="absolute right-0 mt-3 bg-white text-black shadow-lg rounded-lg p-3 w-40 flex flex-col gap-2 z-50">
-                <Link
-                  to="/profile"
+                <button
+                  onClick={() => setAdminProfileOpen(prev => !prev)}
                   className="cursor-pointer hover:bg-gray-100 p-2 rounded border"
                 >
                   Profile
-                </Link>
+                </button>
 
                 <button
                   onClick={handleLogout}
@@ -186,6 +188,9 @@ const Dashbar = () => {
           </div>
         </div>
       </nav>
+      {adminProfileOpen && (
+        <AdminProfile onClose={() => setAdminProfileOpen(false)} />
+      )}
     </div>
   );
 };
