@@ -37,10 +37,12 @@ const UserSignUp = () => {
 
     setIsLoading(true);
     try {
+
+ 
       const res = await axiosInstance.post("/auth/signup", data);
 
+
       login(res.data.user);
-      await checkAuth();
 
       showSuccess("Account created successfully! ✅");
       navigate('/');

@@ -21,7 +21,7 @@ const Dashbar = () => {
 
   const fetchNoti = async () => {
     try {
-      const res = await axiosInstance.get('/Notification');
+      const res = await axiosInstance.get('/notification');
       setData(res.data.notifications);
     } catch (error) {
       console.log(error)

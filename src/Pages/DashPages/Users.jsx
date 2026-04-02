@@ -56,9 +56,9 @@ const Users = () => {
         </div>
       </div>
 
-      {data.length === 0 && (
+      {/* {data.length === 0 && (
         <p>couldn't Find the user</p>
-      )}
+      )} */}
 
       <div className="mt-5 overflow-hidden rounded-lg border-2 border-secondary bg-secondary">
         <table className="w-full">

@@ -82,8 +82,8 @@ const Navbar = () => {
                             </div>
                         ) : (
                             <>
-                                <Link to="/user/signup" className='border text-secondary bg-primary rounded-sm p-2 flex justify-center items-center gap-1 cursor-pointer w-20'>SignUp</Link>
-                                <Link to="/user/login" className='border text-secondary bg-primary rounded-sm p-2 flex justify-center items-center gap-1 cursor-pointer w-20'>Login</Link>
+                                <Link to="/signup" className='border text-secondary bg-primary rounded-sm p-2 flex justify-center items-center gap-1 cursor-pointer w-20'>SignUp</Link>
+                                <Link to="/login" className='border text-secondary bg-primary rounded-sm p-2 flex justify-center items-center gap-1 cursor-pointer w-20'>Login</Link>
                             </>
                         )}
                     </div>

@@ -28,7 +28,7 @@ const SignUp = () => {
     if (!signUpUser.role.trim()) return showError("Please select your role");
 
     try {
-      const res = await axiosInstance.post("/auth/signup", signUpUser);
+      const res = await axiosInstance.post("/auth", signUpUser);
       navigate('/users')
       console.log(res.data);
     } catch (error) {

@@ -26,8 +26,7 @@ const UserLogin = () => {
       const res = await axiosInstance.post("/auth/login", data);
 
       login(res.data.user);
-      await checkAuth();
-
+      
       showSuccess(`Welcome back, ${res.data.user.fullName || 'User'}! ✅`);
       
       if (res.data.user.role === 'admin') {
@@ -124,7 +123,7 @@ const UserLogin = () => {
 
               <div className="mt-6 text-center text-sm font-medium text-gray-500">
                 Don't have an account?{' '}
-                <a href="/user/signup" className="text-secondary hover:underline underline-offset-4 cursor-pointer font-bold">
+                <a href="/signup" className="text-secondary hover:underline underline-offset-4 cursor-pointer font-bold">
                   Register here
                 </a>
               </div>

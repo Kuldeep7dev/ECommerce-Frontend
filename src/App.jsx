@@ -23,7 +23,6 @@ import ProductUpload from "./Pages/DashPages/ProductUpload"
 import SignUp from './Pages/DashPages/SignUp'
 import ViewUsers from './Pages/DashPages/ViewUsers'
 import ViewContact from './Pages/DashPages/ViewContact'
-import Login from './Pages/DashPages/Login'
 import ProtectedRoute from './Component/ProtectedRoute'
 import UpdateUsers from './Pages/DashPages/UpdateUsers'
 import UserSignUp from './Pages/UserSignUp'
@@ -83,9 +82,8 @@ function App() {
             <Route path='/product/:slug' element={<ProductVew />} />
           </Route>
 
-          <Route path='/login' element={<Login />} />
-          <Route path='/user/signup' element={<UserSignUp />} />
-          <Route path='/user/login' element={<UserLogin />} />
+          <Route path='/login' element={<UserLogin />} />
+          <Route path='/signup' element={<UserSignUp />} />
           <Route path='*' element={<NotFound />} />
 
         </Routes>
