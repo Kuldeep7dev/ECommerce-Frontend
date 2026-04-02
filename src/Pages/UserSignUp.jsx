@@ -15,33 +15,47 @@ const UserSignUp = () => {
     password: "",
     confirmPassword: ""
   });
+  const [isLoading, setIsLoading] = useState(false);
   const { login, checkAuth } = useAuth();
 
-  const handlePostData = async (para) => {
-    para.preventDefault()
+
+  const handlePostData = async (e) => {
+    e.preventDefault();
+
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
+    // ✅ Validation
     if (!data.fullName.trim()) return showError("Please enter your full name");
-    if (!emailRegex.test(data.email)) return showError("Please enter valid format of email");
     if (!data.email.trim()) return showError("Please enter your email");
+    if (!emailRegex.test(data.email)) return showError("Invalid email format");
     if (!data.phoneNumber.trim()) return showError("Please enter your phone number");
-    if (!passwordRegex.test(data.password)) return showError("Password must be at least 8 characters and include uppercase, lowercase, number, and special character");
     if (!data.password.trim()) return showError("Please enter your password");
-    if (!data.confirmPassword.trim()) return showError("Please enter confirm password");
-    if (data.password != data.confirmPassword) return showError("Password do not match");
+    if (!passwordRegex.test(data.password)) return showError("Password must be 8+ chars and include uppercase, lowercase, number, and special character");
+    if (!data.confirmPassword.trim()) return showError("Please confirm password");
+    if (data.password !== data.confirmPassword) return showError("Passwords do not match");
 
+    setIsLoading(true);
     try {
       const res = await axiosInstance.post("/auth/signup", data);
-      login(res.data.user)
-      await checkAuth()
-      showSuccess("User created successfully");
-      navigate('/')
-      console.log(res.data);
+
+      login(res.data.user);
+      await checkAuth();
+
+      showSuccess("Account created successfully! ✅");
+      navigate('/');
     } catch (error) {
-      showError(error)
+      console.log(error);
+
+      if (error.response && error.response.data) {
+        showError(error.response.data.message || error.response.data.errors || "Something went wrong");
+      } else {
+        showError("Server error. Please try again later.");
+      }
+    } finally {
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleChange = ({ target: { name, value } }) => {
     setData((prev) => ({
@@ -158,10 +172,11 @@ const UserSignUp = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className='mt-4 border group relative w-full flex justify-center items-center gap-2 bg-primary text-secondary hover:bg-secondary hover:text-primary py-4 rounded-xl font-bold tracking-wide transition-all duration-300 active:scale-[0.98] shadow-lg shadow-gray-300/50'
+                disabled={isLoading}
+                className={`mt-4 border group relative w-full flex justify-center items-center gap-2 bg-primary text-secondary hover:bg-secondary hover:text-primary py-4 rounded-xl font-bold tracking-wide transition-all duration-300 active:scale-[0.98] shadow-lg shadow-gray-300/50 ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
               >
-                Sign Up Now
-                <ArrowRight size={18} className='group-hover:translate-x-1 transition-transform duration-300' />
+                {isLoading ? 'Creating Account...' : 'Sign Up Now'}
+                {!isLoading && <ArrowRight size={18} className='group-hover:translate-x-1 transition-transform duration-300' />}
               </button>
 
               <div className="mt-6 text-center text-sm font-medium text-gray-500">

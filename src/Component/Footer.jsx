@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Youtube, MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin, Phone, Mail, Copyright } from 'lucide-react';
+import { RiFacebookFill, RiInstagramFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
+// Facebook, Twitter, Instagram, Youtube,
 
 const Footer = () => {
   const brands = [
@@ -24,6 +26,7 @@ const Footer = () => {
   ];
 
   const phoneNumber = '919137706176'
+  const email = 'kushallaxkar9@gmail.com'
   const openWhatsapp = () => {
     window.open(`https://wa.me/${phoneNumber}`)
   }
@@ -35,22 +38,22 @@ const Footer = () => {
 
           {/* Company Info */}
           <div>
-            <h2 className="text-2xl font-bold mb-6 tracking-wide" style={{fontFamily: "Dancing Script"}}>brvima</h2>
+            <h2 className="text-2xl font-bold mb-6 tracking-wide" style={{ fontFamily: "Dancing Script" }}>Bravima</h2>
             <p className="opacity-70 mb-6 text-sm leading-relaxed">
               Your one-stop destination for the latest trends in fashion and apparel. Quality products, fast shipping, and excellent customer service.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-300">
-                <Facebook size={20} />
+              <a href="#" target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-300">
+                <RiFacebookFill size={20} />
               </a>
-              <a href="#" className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-300">
-                <Twitter size={20} />
+              <a href="#" target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-300">
+                <RiTwitterXFill size={20} />
               </a>
-              <a href="#" className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-300">
-                <Instagram size={20} />
+              <a href="#" target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-300">
+                <RiInstagramFill size={20} />
               </a>
-              <a href="#" className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-300">
-                <Youtube size={20} />
+              <a href="#" target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-300">
+                <RiYoutubeFill size={20} />
               </a>
             </div>
           </div>
@@ -91,16 +94,24 @@ const Footer = () => {
                 <MapPin size={18} className="flex-shrink-0 mt-0.5" />
                 <span>Near Civil Hospital, Ahmedabad, Gujarat - 382345</span>
               </li>
-              <li className="flex items-center space-x-3 opacity-70 text-sm">
-                <Phone size={18} className="flex-shrink-0" />
-                <span className='cursor-pointer' onClick={openWhatsapp}>+91 91377-06176</span>
-              </li>
-              <li className="flex items-center space-x-3 opacity-70 text-sm">
-                <Mail size={18} className="flex-shrink-0" />
-                <a
-                  href='href="mailto:kushallaxkar9@gmail.com"'
+              <li className="flex items-center space-x-3 text-sm">
+                <Phone size={18} className="flex-shrink-0 opacity-70" />
+                <span 
+                  className='opacity-70 hover:opacity-100 hover:underline cursor-pointer transition-all duration-300' 
+                  onClick={openWhatsapp}
                 >
-                  kushallaxkar9@gmail.com</a>
+                  +91 {phoneNumber.slice(2, 7)}-{phoneNumber.slice(7)}
+                </span>
+              </li>
+              <li className="flex items-center space-x-3 text-sm">
+                <Mail size={18} className="flex-shrink-0 opacity-70" />
+                <a
+                  href={`mailto:${email}?subject=Hello%20Bravima&body=Hi%20Kushal,`}
+                  target='_blank'
+                  className="opacity-70 hover:opacity-100 hover:underline transition-all duration-300"
+                >
+                  {email}
+                </a>
               </li>
             </ul>
 
@@ -123,8 +134,8 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="opacity-70 text-sm text-center md:text-left">
-            &copy; {new Date().getFullYear()} <span style={{ fontFamily: "Dancing Script" }}>bravima</span>. All rights reserved.
+          <p className="opacity-70 text-sm text-center md:text-left flex gap-2 items-center">
+            <Copyright size={15} /> {new Date().getFullYear()} <span style={{ fontFamily: "Dancing Script" }}>Bravima</span>. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link to="/terms" className="opacity-70 hover:opacity-100 text-sm transition-opacity duration-300">Terms of Service</Link>

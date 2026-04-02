@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import 'remixicon/fonts/remixicon.css'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
@@ -27,7 +28,7 @@ createRoot(document.getElementById('root')).render(
             },
           },
           error: {
-            style:{
+            style: {
               background: '#10100e',
               color: '#fffff3',
               border: '#10100e'

@@ -40,7 +40,7 @@ function App() {
         <Routes location={location} key={location.pathname}>
 
           {/* 🔒 ADMIN ROUTES */}
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute requiredRole="admin" />}>
             <Route element={<AdminLayout />}>
               <Route path="/adminpanel" element={<AdminPanel />} />
               <Route path="/products" element={<Products />} />

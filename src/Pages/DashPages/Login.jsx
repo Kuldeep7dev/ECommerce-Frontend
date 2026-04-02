@@ -17,12 +17,16 @@ const Login = () => {
         setLoading(true);
         try {
             // Adjust the endpoint if necessary based on your Node.js backend
-            const res = await axiosInstance.post('/authenticate/login', { email, password });
+            const res = await axiosInstance.post('/auth/login', { email, password });
 
             login(res.data.user);
-            toast.success('Login successful! Welcome back.');
+            toast.success(`Login successful! Welcome back, ${res.data.user.fullName || 'User'}`);
 
-            navigate('/dashboard');
+            if (res.data.user.role === 'admin') {
+                navigate('/dashboard');
+            } else {
+                navigate('/');
+            }
         } catch (error) {
             console.error('Login error:', error);
             toast.error(error.response?.data?.message || 'Failed to login ❌');
@@ -34,7 +38,7 @@ const Login = () => {
     return (
         <div className="flex justify-center items-center min-h-screen bg-primary">
             <div className="bg-primary p-8 rounded-xl border shadow-lg w-full max-w-md">
-                <h2 className="text-2xl font-bold mb-6 text-center text-primary">Admin Login</h2>
+                <h2 className="text-2xl font-bold mb-6 text-center text-primary">Login to Bravima</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
@@ -44,7 +48,7 @@ const Login = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full px-4 py-2 border border-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                            placeholder="admin@example.com"
+                            placeholder="yourname@example.com"
                         />
                     </div>
                     <div>

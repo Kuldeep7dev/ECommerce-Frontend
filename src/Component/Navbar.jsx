@@ -56,16 +56,30 @@ const Navbar = () => {
                 {account && (
                     <div className="absolute border right-0 mt-3 bg-secondary text-black shadow-lg rounded-lg p-3 flex gap-2 z-50">
                         {isAuthenticated ? (
-                            <>
-                                <p className="text-sm text-primary font-semibold">{user?.fullName}</p>
+                            <div className="flex flex-col gap-2">
+                                {user?.role === "admin" ? (
+                                    <>
+                                        <p className="text-sm text-primary font-bold italic">Administrator</p>
+                                        <Link
+                                            to="/dashboard"
+                                            className="border text-secondary bg-primary rounded-sm p-2 flex justify-center items-center gap-1 cursor-pointer w-24 text-xs"
+                                        >
+                                            Dashboard
+                                        </Link>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p className="text-sm text-primary font-semibold">{user?.fullName}</p>
+                                    </>
+                                )}
 
                                 <button
                                     onClick={logout}
-                                    className="border text-secondary bg-primary rounded-sm p-2 cursor-pointer"
+                                    className="border text-secondary bg-primary rounded-sm p-2 cursor-pointer w-full"
                                 >
                                     Logout
                                 </button>
-                            </>
+                            </div>
                         ) : (
                             <>
                                 <Link to="/user/signup" className='border text-secondary bg-primary rounded-sm p-2 flex justify-center items-center gap-1 cursor-pointer w-20'>SignUp</Link>
