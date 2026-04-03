@@ -11,6 +11,14 @@ const Women = () => {
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+
   const fetchdata = async () => {
     try {
       setLoading(true);
@@ -90,7 +98,7 @@ const Women = () => {
                   </p>
 
                   <div className="flex items-center justify-between mt-2">
-                    <p className="text-lg font-bold">₹{pro.price}.00</p>
+                    <p className="text-lg font-bold">₹{pro.price}</p>
                   </div>
 
                   <div className="flex items-center gap-2 mt-3">

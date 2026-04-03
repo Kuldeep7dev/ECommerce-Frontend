@@ -43,7 +43,7 @@ const Navbar = () => {
                         <User size={20} strokeWidth={1.5} />
                     </button>
 
-                    <NavLink to='/addtocart' className={iconLinkClass}>
+                    <NavLink to='/cart' className={iconLinkClass}>
                         <ShoppingBasket size={20} strokeWidth={1.5} />
                     </NavLink>
 

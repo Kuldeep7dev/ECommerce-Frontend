@@ -138,8 +138,8 @@ const Footer = () => {
             <Copyright size={15} /> {new Date().getFullYear()} <span style={{ fontFamily: "Dancing Script" }}>Bravima</span>. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <Link to="/terms" className="opacity-70 hover:opacity-100 text-sm transition-opacity duration-300">Terms of Service</Link>
-            <Link to="/privacy" className="opacity-70 hover:opacity-100 text-sm transition-opacity duration-300">Privacy Policy</Link>
+            <Link to="/terms" className="opacity-70 hover:opacity-100 hover:underline text-sm transition-opacity duration-300">Terms of Service</Link>
+            <Link to="/privacy" className="opacity-70 hover:opacity-100 hover:underline text-sm transition-opacity duration-300">Privacy Policy</Link>
           </div>
         </div>
       </div>

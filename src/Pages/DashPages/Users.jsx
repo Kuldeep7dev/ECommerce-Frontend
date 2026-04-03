@@ -8,15 +8,19 @@ import ConfirmationModal from '../../Component/ConfirmationModel';
 
 const Users = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isConfirmationModelOpen, SetIsConfirmationModelOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
   const fetchUsers = async () => {
     try {
+      setLoading(true);
       const res = await axiosInstance.get('/auth');
-      setData(res.data.user);
+      setData(res.data.users || []);
     } catch (error) {
-      console.log("Server error while you get users")
+      console.error("Server error while fetching users:", error.response?.data || error.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -78,38 +82,60 @@ const Users = () => {
           </thead>
 
           <tbody>
-            {data.map((users, index) => (
-              <tr key={users._id} className="text-center text-primary">
-                <td className="p-3 border-2 border-secondary">{index + 1}</td>
-                <td className="p-3 border-2 border-secondary">{users.fullName}</td>
-                <td className="p-3 border-2 border-secondary">{users.email}</td>
-                <td className="p-3 border-2 border-secondary">{users.phoneNumber}</td>
-                <td className="p-3 border-2 border-secondary capitalize">
-                  {users.role}
-                </td>
-                <td className="p-3 border-2 border-secondary">
+            {loading ? (
+              <tr>
+                <td colSpan="6" className="p-10 text-center text-primary font-bold">
                   <div className="flex justify-center items-center gap-2">
-                    <Link
-                      to={`/users/${users._id}`}
-                      className="p-2 rounded-xl border-2 bg-blue-500 text-white hover:bg-white hover:text-blue-500 hover:border-blue-500 transition-all"
-                    >
-                      <Eye size={20} />
-                    </Link>
-
-                    <Link to={`/users/${users._id}/update`} className="p-2 rounded-xl border-2 bg-accent text-white hover:bg-white hover:text-accent hover:border-accent transition-all">
-                      <Pencil size={20} />
-                    </Link>
-
-                    <button
-                      onClick={() => handleDeleteAction(users)}
-                      className="border-2 p-2 rounded-xl bg-red-500 text-white hover:bg-white hover:text-red-500 hover:border-red-500 transition-all cursor-pointer"
-                    >
-                      <Trash size={20} />
-                    </button>
-                  </div>
+                <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                Loading users...
+              </div>
                 </td>
               </tr>
-            ))}
+            ) : data.length > 0 ? (
+              data.map((user, index) => (
+                <tr key={user._id} className="text-center text-primary transition-colors">
+                  <td className="p-3 border-2 border-secondary">{index + 1}</td>
+                  <td className="p-3 border-2 border-secondary">{user.fullName}</td>
+                  <td className="p-3 border-2 border-secondary">{user.email}</td>
+                  <td className="p-3 border-2 border-secondary">{user.phoneNumber}</td>
+                  <td className="p-3 border-2 border-secondary">
+                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${user.role === 'admin' ? 'bg-accent text-white' : 'bg-primary text-secondary'}`}>
+                      {user.role}
+                    </span>
+                  </td>
+                  <td className="p-3 border-2 border-secondary">
+                    <div className="flex justify-center items-center gap-2">
+                      <Link
+                        to={`/users/${user._id}`}
+                        className="p-2 rounded-xl border-2 bg-blue-500 text-white hover:bg-white hover:text-blue-500 hover:border-blue-500 transition-all shadow-sm"
+                      >
+                        <Eye size={20} />
+                      </Link>
+
+                      <Link 
+                        to={`/users/${user._id}/update`} 
+                        className="p-2 rounded-xl border-2 bg-accent text-white hover:bg-white hover:text-accent hover:border-accent transition-all shadow-sm"
+                      >
+                        <Pencil size={20} />
+                      </Link>
+
+                      <button
+                        onClick={() => handleDeleteAction(user)}
+                        className="border-2 p-2 rounded-xl bg-red-500 text-white hover:bg-white hover:text-red-500 hover:border-red-500 transition-all cursor-pointer shadow-sm"
+                      >
+                        <Trash size={20} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" className="p-10 text-center text-primary opacity-60">
+                  No users found in the database.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

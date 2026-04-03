@@ -38,7 +38,7 @@ const UpdateProduct = () => {
   const [product, setProduct] = useState({
     productName: "",
     stock: "",
-    price: "",
+    price: Number,
     category: "",
     colour: [],
   });
@@ -52,7 +52,7 @@ const UpdateProduct = () => {
         setProduct({
           productName: data.productName ?? "",
           stock: data.stock ?? "",
-          price: data.price ?? "",
+          price: data.price ?? Number,
           category:
             typeof data.category === "object"
               ? data.category?.name || ""
@@ -62,7 +62,7 @@ const UpdateProduct = () => {
         setOriginalProduct({
           productName: data.productName ?? "",
           stock: data.stock ?? "",
-          price: data.price ?? "",
+          price: data.price ?? Number,
           category:
             typeof data.category === "object"
               ? data.category?.name || ""
@@ -122,7 +122,7 @@ const UpdateProduct = () => {
     const basicSame =
       product.productName === originalProduct.productName &&
       String(product.stock) === String(originalProduct.stock) &&
-      String(product.price) === String(originalProduct.price) &&
+      Number(product.price) === Number(originalProduct.price) &&
       product.category === originalProduct.category;
 
     const colourSame =
@@ -239,7 +239,7 @@ const UpdateProduct = () => {
               <div className="flex items-center border rounded-md px-3 py-2 mt-1">
                 <IndianRupee size={18} className="text-gray-500 mr-2" />
                 <input
-                  type="text"
+                  type="number"
                   name="price"
                   value={product.price}
                   onChange={handleChange}

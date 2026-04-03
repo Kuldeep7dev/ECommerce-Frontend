@@ -96,7 +96,7 @@ const Men = () => {
                   </p>
 
                   <div className="flex items-center justify-between mt-2">
-                    <p className="text-lg font-bold">₹{pro.price}.00</p>
+                    <p className="text-lg font-bold">₹{pro.price}</p>
                   </div>
 
                   <div className="flex items-center gap-2 mt-3">

@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Heart, IndianRupee } from 'lucide-react'
 import axiosInstance from '../Config/AxiosInstance'
 import Pages from '../Component/Global/Pages'
 import { CATEGORY } from '../Constent/product'
+import { useAuth } from '../context/AuthContext'
+import { showError, showSuccess } from '../Utils/toaster'
 
 const ProductVew = () => {
   const [productView, setProductView] = useState({});
   const [menProduct, setMenProduct] = useState([])
-  const { slug } = useParams()
+  const { isAuthenticated, user } = useAuth();
+  const { slug } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = `Bravima || ${slug} Product` 
+  }, [])
 
   const fetchProductView = async () => {
     try {
       const res = await axiosInstance.get(`/product/${slug}`);
-      setProductView(res.data.product)
+      setProductView(res.data.product);
     } catch (error) {
       console.log(error);
     }
@@ -29,14 +37,37 @@ const ProductVew = () => {
     }
   }
 
+  const handleAddToCart = async () => {
+    try {
+      if (!isAuthenticated) {
+        navigate('/login')
+      };
+
+      const res = await axiosInstance.post('/add-to-cart', {
+        userId: user._id,
+        productId: productView._id,
+        quantity: 1
+      });
+
+      console.log(res.data.cart);
+
+      showSuccess(`${productView.productName} added to Cart`)
+    } catch (error) {
+      showError(error?.response?.data?.message || "Failed to add");
+      console.log(error?.response?.data?.message || "Failed to add")
+    }
+  }
+
+  const handleWishlist = async () => {
+
+
+
+  }
+
   useEffect(() => {
     fetchProductView()
     fetchMenProduct()
   }, [slug]);
-
-  const handleCart = () => {
-    alert(`${slug} in cart`)
-  }
 
   return (
     <Pages>
@@ -64,7 +95,7 @@ const ProductVew = () => {
               <div className="mb-6">
                 <p className='flex items-center text-xl font-bold'>
                   <IndianRupee size={18} />
-                  {productView.price}.00
+                  {productView.price}
                 </p>
                 <p className='text-gray-500 font-bold text-xs tracking-wider'>
                   Inclusive of all taxes
@@ -84,11 +115,11 @@ const ProductVew = () => {
 
               {/* BUTTONS */}
               <div className='flex gap-4'>
-                <button onClick={handleCart} className='flex gap-1 items-center border p-3 font-bold tracking-wider w-44 justify-center cursor-pointer rounded-full bg-primary text-secondary hover:bg-secondary hover:text-primary transition-all duration-300'>
+                <button onClick={handleAddToCart} className='flex gap-1 items-center border p-3 font-bold tracking-wider w-44 justify-center cursor-pointer rounded-full bg-primary text-secondary hover:bg-secondary hover:text-primary transition-all duration-300'>
                   Add to cart
                 </button>
 
-                <button className='flex gap-1 items-center border p-3 font-bold tracking-wider w-44 justify-center cursor-pointer rounded-full bg-accent hover:bg-secondary duration-300 hover:text-primary'>
+                <button onClick={handleWishlist} className='flex gap-1 items-center border p-3 font-bold tracking-wider w-44 justify-center cursor-pointer rounded-full bg-accent hover:bg-secondary duration-300 hover:text-primary'>
                   Wishlist <Heart size={18} />
                 </button>
               </div>
@@ -133,12 +164,12 @@ const ProductVew = () => {
                       {/* COLORS */}
                       <div className="flex items-center gap-2 mt-3">
                         {men.colour?.map((c, index) => (
-                            <span
-                              key={index}
-                              className="w-4 h-4 rounded-full border"
-                              style={{ backgroundColor: c }}
-                            />
-                          ))}
+                          <span
+                            key={index}
+                            className="w-4 h-4 rounded-full border"
+                            style={{ backgroundColor: c }}
+                          />
+                        ))}
                       </div>
                     </div>
 

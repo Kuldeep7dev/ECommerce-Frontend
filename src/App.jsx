@@ -77,7 +77,7 @@ function App() {
             <Route path='/women' element={<Women />} />
             <Route path='/children' element={<Children />} />
             <Route path='/search' element={<Search />} />
-            <Route path='/addtocart' element={<AddToCart />} />
+            <Route path='/cart' element={<AddToCart />} />
             <Route path='/wishlist' element={<Wishlist />} />
             <Route path='/product/:slug' element={<ProductVew />} />
           </Route>

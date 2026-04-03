@@ -14,7 +14,7 @@ const ProductUpload = () => {
   const [data, setData] = useState({
     productName: "",
     stock: "",
-    price: "",
+    price: Number,
     category: "",
     brand: "",
     colour: [],
@@ -171,7 +171,7 @@ const ProductUpload = () => {
               <div className="flex items-center border rounded-md px-3 py-2 mt-1">
                 <IndianRupee size={18} className="text-gray-500 mr-2" />
                 <input
-                  type="text"
+                  type="number"
                   name="price"
                   value={data.price}
                   onChange={handleChange}
