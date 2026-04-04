@@ -15,7 +15,7 @@ const ProductVew = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = `Bravima || ${slug} Product` 
+    document.title = `Bravima || ${slug} Product`
   }, [])
 
   const fetchProductView = async () => {
@@ -30,8 +30,7 @@ const ProductVew = () => {
   const fetchMenProduct = async () => {
     try {
       const res = await axiosInstance.get(`/product`)
-      setMenProduct(res.data.product)
-      console.log(res.data.product)
+      setMenProduct(res.data.product);
     } catch (error) {
       console.error(error);
     }
@@ -48,20 +47,29 @@ const ProductVew = () => {
         productId: productView._id,
         quantity: 1
       });
-
-      console.log(res.data.cart);
-
       showSuccess(`${productView.productName} added to Cart`)
     } catch (error) {
-      showError(error?.response?.data?.message || "Failed to add");
+      showError("Failed to add");
       console.log(error?.response?.data?.message || "Failed to add")
     }
   }
 
   const handleWishlist = async () => {
+    try {
+      if (!isAuthenticated) {
+        navigate('/')
+      };
 
-
-
+      const res = await axiosInstance.post('/wishlist', {
+        userId: user._id,
+        productId: productView._id
+      });
+      console.log(res.data.wishlist);
+      showSuccess(`${productView.productName} added to wishlist`);
+    } catch (error) {
+      showError("Failed to add");
+      console.log(error?.response?.data?.message || "Failed to add")
+    }
   }
 
   useEffect(() => {

@@ -15,7 +15,7 @@ const AddToCart = () => {
             const res = await axiosInstance.get('/add-to-cart');
             setCart(res.data.cart);
         } catch (error) {
-            showError("Failed to fetch cart data");
+            // showError("Failed to fetch cart data");
             console.error("Cart fetch error:", error);
         } finally {
             setLoading(false);
@@ -168,8 +168,8 @@ const AddToCart = () => {
                                     <div className='flex justify-between items-center bg-primary/5 p-4 rounded-2xl'>
                                         <span className='text-lg font-bold'>Total Price: </span>
                                         <span className='text-lg font-bold flex items-center text-secondary'>
-                                            <IndianRupee size={22} />
-                                            {cart.totalPrice.toLocaleString()}
+                                            <IndianRupee size={15} />
+                                            <span>{cart.totalPrice.toLocaleString()}</span>
                                         </span>
                                     </div>
                                 </div>
