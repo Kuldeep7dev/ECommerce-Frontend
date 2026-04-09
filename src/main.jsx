@@ -6,6 +6,7 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './context/AuthContext'
+import { SocketProvider } from './socket/SocketProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -41,7 +42,9 @@ createRoot(document.getElementById('root')).render(
         }}
       />
       <AuthProvider>
-        <App />
+        <SocketProvider>
+          <App />
+        </SocketProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>,

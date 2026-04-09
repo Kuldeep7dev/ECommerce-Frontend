@@ -2,26 +2,58 @@ import React, { useEffect, useState } from 'react'
 import Pages from '../Component/Global/Pages'
 import axiosInstance from '../Config/AxiosInstance';
 import { Heart, ShoppingBag, ShoppingBagIcon, ShoppingBasket, Trash2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { showError, showSuccess } from '../Utils/toaster';
+import { useAuth } from '../context/AuthContext';
 
 const Wishlist = () => {
   const [wishList, setWishList] = useState({ items: [] });
   const [loading, setLoading] = useState(true);
+  const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
 
   const fetchWishlistData = async () => {
     try {
       const res = await axiosInstance.get('/wishlist');
       setWishList(res.data.wishlist);
-      console.log(res.data.wishlist)
     } catch (error) {
-      console.error("Cart fetch error:", error);
+      console.error("Wishlist fetch error:", error);
     } finally {
       setLoading(false)
+    }
+  };
+
+  const handleAddToCart = async (product) => {
+    try {
+      if (!isAuthenticated) {
+        navigate('/login')
+        return;
+      };
+
+      const res = await axiosInstance.post('/add-to-cart', {
+        userId: user?._id,
+        productId: product._id,
+        quantity: 1
+      });
+      showSuccess(`${product.productName} added to Cart`)
+    } catch (error) {
+      showError("Failed to add");
+      console.log(error?.response?.data?.message || "Failed to add")
+    }
+  }
+
+  const handleDeleteWishlist = async (productId) => {
+    try {
+      const res = await axiosInstance.delete(`/wishlist/${productId}`);
+      fetchWishlistData();
+      showSuccess("Item removed from wishlist")
+    } catch (error) {
+      showError("Failed to remove item")
     }
   }
 
   useEffect(() => {
-    document.title = "Bravima || Wishlist"
+    document.title = "Bravima || My Wishlist"
     fetchWishlistData()
   }, [])
 
@@ -108,13 +140,15 @@ const Wishlist = () => {
                   <div className="flex justify-between items-center pt-2">
 
                     <button
-                      // onClick={() => handleCartDelete(item.productId._id)} 
+                      onClick={() => handleDeleteWishlist(item.productId._id)}
                       className='text-white bg-red-500 hover:text-red-500 hover:bg-white border p-2 rounded-xl transition-colors cursor-pointer'>
                       <span className='flex items-center gap-1'><Trash2 size={18} /></span>
                     </button>
 
-                    <button className="text-white bg-secondary hover:text-secondary hover:bg-white border p-2 rounded-xl transition-colors cursor-pointer">
-                      <ShoppingBasket size={18}/>
+                    <button
+                      onClick={() => handleAddToCart(item.productId)}
+                      className="text-white bg-secondary hover:text-secondary hover:bg-white border p-2 rounded-xl transition-colors cursor-pointer">
+                      <ShoppingBasket size={18} />
                     </button>
 
                   </div>
