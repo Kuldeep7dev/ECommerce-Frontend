@@ -86,9 +86,9 @@ const Wishlist = () => {
 
         {/* Empty State */}
         {wishList.items.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-24 border-2 border-dashed rounded-3xl bg-gray-50">
-            <div className="bg-primary/10 p-6 rounded-full mb-6">
-              <Heart size={40} className="text-primary" />
+          <div className="flex flex-col items-center justify-center py-24 border-2 border-dashed rounded-3xl bg-white">
+            <div className="bg-red-600 p-6 rounded-full mb-6">
+              <Heart size={40} className="text-secondary" />
             </div>
 
             <h2 className="text-xl font-semibold mb-2">Your wishlist is empty</h2>
@@ -98,7 +98,7 @@ const Wishlist = () => {
 
             <Link
               to="/"
-              className="bg-primary text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition"
+              className="bg-secondary text-primary hover:bg-primary hover:text-secondary hover:border px-6 py-3 rounded-full font-medium transition"
             >
               Browse Products
             </Link>

@@ -1,15 +1,17 @@
 import { Heart, Search, ShoppingBasket, User } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { CATEGORY } from '../Constent/product'
 import { useAuth } from '../context/AuthContext'
 import axiosInstance from '../Config/AxiosInstance'
+import { showError } from '../Utils/toaster'
 
 const Navbar = () => {
     const [account, setAccount] = useState(false)
     const { user, isAuthenticated, logout } = useAuth()
     const [count, setCount] = useState({ items: [] });
     const [wishCount, setWishCount] = useState({ items: [] });
+    const navigate = useNavigate();
 
     const navLinkClass = ({ isActive }) =>
         `p-2 tracking-widest font-bold transition-colors duration-200 hover:text-accent ${isActive ? 'text-green-500' : ''
@@ -21,6 +23,7 @@ const Navbar = () => {
 
     const fetchCountValue = async () => {
         try {
+
             const res = await axiosInstance.get('/add-to-cart')
             if (res.data && res.data.cart) {
                 setCount(res.data.cart)
@@ -47,6 +50,13 @@ const Navbar = () => {
             handleWishlist()
         }
     }, [isAuthenticated])
+
+    const handleProtectedNavigation = (e, path) => {
+        if (!isAuthenticated) {
+            e.preventDefault();
+            navigate('/login')
+        }
+    }
 
     return (
         <div>
@@ -81,7 +91,10 @@ const Navbar = () => {
                     </button>
 
                     <div className='flex gap-3'>
-                        <NavLink to='/cart' className={`${iconLinkClass} relative cursor-pointer`}>
+                        <NavLink
+                            to='/cart'
+                            onClick={(e) => handleProtectedNavigation(e, "/cart")}
+                            className={`${iconLinkClass} relative cursor-pointer`}>
                             {isAuthenticated && count?.items?.length > 0 && (
                                 <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-accent hover:text-accent hover:bg-white duration-200 text-primary text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
                                     {count.items.length}
@@ -90,7 +103,10 @@ const Navbar = () => {
                             <ShoppingBasket size={20} strokeWidth={1.5} />
                         </NavLink>
 
-                        <NavLink to='/wishlist' className={`${iconLinkClass} relative cursor-pointer`}>
+                        <NavLink
+                            to='/wishlist'
+                            onClick={(e) => handleProtectedNavigation(e, "/wishlist")}
+                            className={`${iconLinkClass} relative cursor-pointer`}>
                             {isAuthenticated && wishCount?.items?.length > 0 && (
                                 <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-accent hover:text-accent hover:bg-white duration-200 bg-accent text-primary text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
                                     {wishCount.items.length}
