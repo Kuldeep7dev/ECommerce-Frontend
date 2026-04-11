@@ -3,11 +3,12 @@ import Pages from '../Component/Global/Pages';
 import axiosInstance from '../Config/AxiosInstance';
 import { showError, showSuccess } from '../Utils/toaster';
 import { Trash2, IndianRupee, ShoppingBag, Minus, Plus } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AddToCart = () => {
     const [cart, setCart] = useState({ items: [], totalPrice: 0, totalItems: 0 });
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate()
 
     const fetchCartData = async () => {
         try {
@@ -55,6 +56,10 @@ const AddToCart = () => {
                 </div>
             </Pages>
         );
+    }
+
+    const handleNavigate = () => {
+        navigate('')
     }
 
     return (

@@ -27,6 +27,7 @@ import ProtectedRoute from './Component/ProtectedRoute'
 import UpdateUsers from './Pages/DashPages/UpdateUsers'
 import UserSignUp from './Pages/UserSignUp'
 import UserLogin from './Pages/UserLogin'
+import UserProfile from './Pages/UserProfile'
 
 
 function App() {
@@ -58,19 +59,8 @@ function App() {
               <Route path='/users/create' element={<SignUp />} />
             </Route>
           </Route>
-          {/* <Route element={<AdminRoute />}>
-            <Route element={<AdminLayout />}> */}
-          {/* <Route path='/adminpanel' element={<AdminPanel />} />
-              <Route path='/orders' element={<Orders />} />
-              <Route path='/contact' element={<Contact />} />
-              <Route path='/profile' element={<Profile />} />
-              
-              <Route path='/products' element={<Products />} />
-              <Route /> */}
-          {/* </Route>
-          </Route> */}
 
-          {/* 🌍 PUBLIC */}
+          {/* 🌐 WEB LAYOUT */}
           <Route element={<WebLayout />}>
             <Route path='/' element={<Home />} />
             <Route path='/men' element={<Men />} />
@@ -85,6 +75,7 @@ function App() {
           <Route path='/login' element={<UserLogin />} />
           <Route path='/signup' element={<UserSignUp />} />
           <Route path='*' element={<NotFound />} />
+          <Route path='/user/profile' element={<UserProfile />} />
 
         </Routes>
       </AnimatePresence>
