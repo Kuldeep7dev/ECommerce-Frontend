@@ -15,3 +15,8 @@
 body {
   background: var(--secondary-color);
 }
+
+::selection {
+  background-color: #16A34A;
+  color: #ffffff;
+}

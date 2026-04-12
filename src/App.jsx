@@ -28,6 +28,7 @@ import UpdateUsers from './Pages/DashPages/UpdateUsers'
 import UserSignUp from './Pages/UserSignUp'
 import UserLogin from './Pages/UserLogin'
 import UserProfile from './Pages/UserProfile'
+import UserAddress from './Pages/UserAddress'
 
 
 function App() {
@@ -76,6 +77,7 @@ function App() {
           <Route path='/signup' element={<UserSignUp />} />
           <Route path='*' element={<NotFound />} />
           <Route path='/user/profile' element={<UserProfile />} />
+          <Route path='/address' element={<UserAddress />} />
 
         </Routes>
       </AnimatePresence>

@@ -32,11 +32,6 @@ const UserProfile = () => {
   const role = user?.role || 'customer'
   const initial = displayName.charAt(0).toUpperCase()
 
-  const handleLogout = () => {
-    logout()
-    navigate('/')
-  }
-
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-primary text-secondary px-6 py-24">
@@ -70,12 +65,12 @@ const UserProfile = () => {
   }
 
   return (
-    
+
     <div className="min-h-screen bg-primary px-4 py-6 text-secondary sm:px-8 lg:px-12">
       <nav className="fixed left-4 right-4 top-4 z-50 flex items-center justify-between rounded-2xl border border-secondary/15 bg-secondary/95 px-5 py-3 text-primary shadow-[0_20px_60px_rgba(16,16,14,0.12)] backdrop-blur sm:left-8 sm:right-8 lg:left-12 lg:right-12">
         <Link
           to="/"
-          className="select-none text-3xl font-bold"
+          className="select-none text-xl font-bold"
           style={{ fontFamily: 'Dancing Script' }}
         >
           bravima
@@ -91,8 +86,11 @@ const UserProfile = () => {
             </Link>
           )}
           <button
-            onClick={handleLogout}
-            className="rounded-full border border-primary/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:bg-primary hover:text-secondary"
+            onClick={() => {
+              logout
+              navigate('/')
+            }}
+            className="rounded-full border cursor-pointer border-primary/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:bg-primary hover:text-secondary"
           >
             Logout
           </button>
@@ -159,11 +157,10 @@ const UserProfile = () => {
             {profileActions.map((action, index) => (
               <div
                 key={action.title}
-                className={`rounded-[28px] border p-6 transition-transform duration-300 hover:-translate-y-1 ${
-                  index === 0
-                    ? 'border-accent/20 bg-accent/10'
-                    : 'border-primary/10 bg-primary/5'
-                }`}
+                className={`rounded-[28px] border p-6 transition-transform duration-300 hover:-translate-y-1 ${index === 0
+                  ? 'border-accent/20 bg-accent/10'
+                  : 'border-primary/10 bg-primary/5'
+                  }`}
               >
                 <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/55">
                   Quick action
@@ -173,11 +170,10 @@ const UserProfile = () => {
 
                 <Link
                   to={action.to}
-                  className={`mt-6 inline-flex rounded-full px-5 py-2.5 text-sm font-bold transition-colors duration-300 ${
-                    index === 0
-                      ? 'bg-primary text-secondary hover:bg-accent'
-                      : 'border border-primary/15 hover:bg-primary hover:text-secondary'
-                  }`}
+                  className={`mt-6 inline-flex rounded-full px-5 py-2.5 text-sm font-bold transition-colors duration-300 cursor-pointer ${index === 0
+                    ? 'bg-primary text-secondary hover:bg-accent'
+                    : 'border border-primary/15 hover:bg-primary hover:text-secondary'
+                    }`}
                 >
                   {action.label}
                 </Link>
@@ -198,8 +194,11 @@ const UserProfile = () => {
               </div>
 
               <button
-                onClick={handleLogout}
-                className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-secondary transition-all duration-300 hover:bg-accent"
+                onClick={() => {
+                  logout
+                  navigate('/')
+                }}
+                className="rounded-full cursor-pointer bg-primary px-6 py-3 text-sm font-bold text-secondary transition-all duration-300 hover:bg-accent"
               >
                 Logout now
               </button>
