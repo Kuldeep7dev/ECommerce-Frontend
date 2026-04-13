@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const AddToCart = () => {
     const [cart, setCart] = useState({ items: [], totalPrice: 0, totalItems: 0 });
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const fetchCartData = async () => {
         try {
@@ -28,12 +28,52 @@ const AddToCart = () => {
         fetchCartData();
     }, []);
 
+    // Replace ONLY handleUpdateQuantity function
+
     const handleUpdateQuantity = async (productId, delta) => {
+        // backup old cart
+        const oldCart = cart;
+
+        // update current json instantly (no flicker)
+        const updatedItems = cart.items.map((item) => {
+            if (item.productId._id === productId) {
+                return {
+                    ...item,
+                    quantity: Math.max(1, item.quantity + delta)
+                };
+            }
+            return item;
+        });
+
+        const totalPrice = updatedItems.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+        );
+
+        const totalItems = updatedItems.reduce(
+            (sum, item) => sum + item.quantity,
+            0
+        );
+
+        // instant UI update
+        setCart({
+            ...cart,
+            items: updatedItems,
+            totalPrice,
+            totalItems
+        });
+
         try {
-            await axiosInstance.post('/add-to-cart', { productId, quantity: delta });
-            fetchCartData();
+            // send api request in background
+            await axiosInstance.post('/add-to-cart', {
+                productId,
+                quantity: delta
+            });
+
             showSuccess("Cart updated");
         } catch (error) {
+            // rollback if api fail
+            setCart(oldCart);
             showError("Failed to update cart");
         }
     };
@@ -113,7 +153,7 @@ const AddToCart = () => {
                                                 <h3 className='text-lg font-semibold text-gray-800'>{item.productId.productName}</h3>
                                             </div>
                                             <button onClick={() => handleCartDelete(item.productId._id)} className='text-white bg-red-500 hover:text-red-500 hover:bg-white border p-1 rounded-full  transition-colors p-2 cursor-pointer'>
-                                                <span className='flex items-center gap-1 '>Clear Cart <Trash2 size={18} /></span>
+                                                <span className='flex items-center gap-1 '><Trash2 size={18} /></span>
                                             </button>
                                         </div>
 
@@ -127,7 +167,7 @@ const AddToCart = () => {
                                                 </button>
                                                 <span className='w-12 text-center font-bold'>{item.quantity}</span>
                                                 <button
-                                                    onClick={() => handleUpdateQuantity(item.productId._id, 1)}
+                                                    onClick={() => handleUpdateQuantity(item.productId._id, +1)}
                                                     className='w-8 h-8 flex items-center justify-center rounded-full hover:bg-white transition cursor-pointer'
                                                 >
                                                     <Plus size={14} />

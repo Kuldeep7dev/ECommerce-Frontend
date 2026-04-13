@@ -2,26 +2,15 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
-const profileActions = [
-  {
-    title: 'Account details',
-    description: 'Review your personal information and keep your profile updated.',
-    label: 'Edit profile',
-    to: '/signup',
-  },
-  {
-    title: 'Saved addresses',
-    description: 'Manage your default delivery location for a faster checkout.',
-    label: 'Manage address',
-    to: '/cart',
-  },
-]
+
 
 const adminHighlights = [
   { label: 'Role', value: 'Administrator' },
   { label: 'Access', value: 'Full control' },
   { label: 'Status', value: 'Active account' },
 ]
+
+
 
 const UserProfile = () => {
   const { user, isAuthenticated, logout } = useAuth()
@@ -31,6 +20,17 @@ const UserProfile = () => {
   const email = user?.email || 'No email added yet'
   const role = user?.role || 'customer'
   const initial = displayName.charAt(0).toUpperCase()
+
+  const profileActions = [
+    {
+      title: 'Saved addresses',
+      description: user?.shippingAddress
+        ? `${user.shippingAddress.street}, ${user.shippingAddress.city}, ${user.shippingAddress.state} - ${user.shippingAddress.postalCode}, ${user.shippingAddress.country}`
+        : 'Manage your default delivery location for a faster checkout.',
+      label: 'Manage address',
+      to: '/user/address-update',
+    },
+  ]
 
   if (!isAuthenticated) {
     return (
@@ -66,36 +66,7 @@ const UserProfile = () => {
 
   return (
 
-    <div className="min-h-screen bg-primary px-4 py-6 text-secondary sm:px-8 lg:px-12">
-      <nav className="fixed left-4 right-4 top-4 z-50 flex items-center justify-between rounded-2xl border border-secondary/15 bg-secondary/95 px-5 py-3 text-primary shadow-[0_20px_60px_rgba(16,16,14,0.12)] backdrop-blur sm:left-8 sm:right-8 lg:left-12 lg:right-12">
-        <Link
-          to="/"
-          className="select-none text-xl font-bold"
-          style={{ fontFamily: 'Dancing Script' }}
-        >
-          bravima
-        </Link>
-
-        <div className="flex items-center gap-3">
-          {role === 'admin' && (
-            <Link
-              to="/dashboard"
-              className="rounded-full bg-accent px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-white transition-opacity duration-300 hover:opacity-90"
-            >
-              Dashboard
-            </Link>
-          )}
-          <button
-            onClick={() => {
-              logout
-              navigate('/')
-            }}
-            className="rounded-full border cursor-pointer border-primary/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:bg-primary hover:text-secondary"
-          >
-            Logout
-          </button>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-primary text-secondary sm:px-8 lg:px-12">
 
       <div className="mx-auto flex max-w-6xl flex-col gap-8 pt-28 lg:flex-row lg:items-stretch">
         <section className="relative overflow-hidden rounded-[32px] border border-secondary/15 bg-secondary p-8 text-primary shadow-[0_30px_80px_rgba(16,16,14,0.12)] lg:w-[420px]">
@@ -122,7 +93,10 @@ const UserProfile = () => {
             </div>
 
             <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1">
-              {(role === 'admin' ? adminHighlights : adminHighlights.slice(1)).map((item) => (
+              {(role === 'admin'
+                ? adminHighlights
+                : adminHighlights.filter((item) => item.label !== 'Role')
+              ).map((item) => (
                 <div
                   key={item.label}
                   className="rounded-[22px] border border-primary/10 bg-white/60 px-4 py-4"
@@ -153,11 +127,11 @@ const UserProfile = () => {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-2">
+          <div className="mt-8 grid gap-5 md:grid-cols-1"> {/* width full, same height */}
             {profileActions.map((action, index) => (
               <div
                 key={action.title}
-                className={`rounded-[28px] border p-6 transition-transform duration-300 hover:-translate-y-1 ${index === 0
+                className={`w-full rounded-[28px] border p-6 transition-transform duration-300 hover:-translate-y-1 ${index === 0
                   ? 'border-accent/20 bg-accent/10'
                   : 'border-primary/10 bg-primary/5'
                   }`}
@@ -165,8 +139,12 @@ const UserProfile = () => {
                 <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/55">
                   Quick action
                 </span>
+
                 <h3 className="mt-4 text-xl font-black">{action.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-primary/70">{action.description}</p>
+
+                <p className="mt-3 text-sm leading-7 text-primary/70">
+                  {action.description}
+                </p>
 
                 <Link
                   to={action.to}
@@ -195,12 +173,12 @@ const UserProfile = () => {
 
               <button
                 onClick={() => {
-                  logout
+                  logout()
                   navigate('/')
                 }}
                 className="rounded-full cursor-pointer bg-primary px-6 py-3 text-sm font-bold text-secondary transition-all duration-300 hover:bg-accent"
               >
-                Logout now
+                Logout
               </button>
             </div>
           </div>

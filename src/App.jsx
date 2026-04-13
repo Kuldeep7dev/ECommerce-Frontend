@@ -71,12 +71,12 @@ function App() {
             <Route path='/cart' element={<AddToCart />} />
             <Route path='/wishlist' element={<Wishlist />} />
             <Route path='/product/:slug' element={<ProductVew />} />
+            <Route path='/user/profile' element={<UserProfile />} />
           </Route>
 
           <Route path='/login' element={<UserLogin />} />
           <Route path='/signup' element={<UserSignUp />} />
           <Route path='*' element={<NotFound />} />
-          <Route path='/user/profile' element={<UserProfile />} />
           <Route path='/address' element={<UserAddress />} />
 
         </Routes>

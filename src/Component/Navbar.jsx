@@ -105,7 +105,7 @@ const Navbar = () => {
                             className={({ isActive }) => `${iconLinkClass({ isActive })} relative`}
                         >
                             {count?.items?.length > 0 && (
-                                <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-accent text-primary text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                                <span className="absolute top-2 right-2 translate-x-1/2 -translate-y-1/2 bg-accent text-primary text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
                                     {count.items.length}
                                 </span>
                             )}
@@ -119,7 +119,7 @@ const Navbar = () => {
                             className={({ isActive }) => `${iconLinkClass({ isActive })} relative`}
                         >
                             {wishCount?.items?.length > 0 && (
-                                <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-accent text-primary text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                                <span className="absolute top-2 right-2 translate-x-1/2 -translate-y-1/2 bg-accent text-primary text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
                                     {wishCount.items.length}
                                 </span>
                             )}

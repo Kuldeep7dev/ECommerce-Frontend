@@ -13,7 +13,6 @@ export const SocketProvider = ({ children }) => {
 
             const onConnect = () => {
                 socket.emit("register", user._id, user.role);
-                console.log("Socket connected and user registered:", user._id);
             };
 
             socket.on("connect", onConnect);
