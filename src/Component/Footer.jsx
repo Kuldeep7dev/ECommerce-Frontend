@@ -20,7 +20,7 @@ const Footer = () => {
 
   const help = [
     { title: "About Us", link: "/about" },
-    { title: "Contact Us", link: "/contact" },
+    { title: "Contact Us", link: "/contact-us" },
     { title: "Return Policy", link: "/returns" },
     { title: "FAQ", link: "/faq" }
   ];
@@ -96,8 +96,8 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-3 text-sm">
                 <Phone size={18} className="flex-shrink-0 opacity-70" />
-                <span 
-                  className='opacity-70 hover:opacity-100 hover:underline cursor-pointer transition-all duration-300' 
+                <span
+                  className='opacity-70 hover:opacity-100 hover:underline cursor-pointer transition-all duration-300'
                   onClick={openWhatsapp}
                 >
                   +91 {phoneNumber.slice(2, 7)}-{phoneNumber.slice(7)}
@@ -106,7 +106,7 @@ const Footer = () => {
               <li className="flex items-center space-x-3 text-sm">
                 <Mail size={18} className="flex-shrink-0 opacity-70" />
                 <a
-                  href={`mailto:${email}?subject=Hello%20Bravima&body=Hi%20Kushal,`}
+                  href={`mailto:${email}`}
                   target='_blank'
                   className="opacity-70 hover:opacity-100 hover:underline transition-all duration-300"
                 >

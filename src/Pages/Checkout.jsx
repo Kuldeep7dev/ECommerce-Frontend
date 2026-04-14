@@ -67,7 +67,7 @@ const Checkout = () => {
             if (verify.data.success) {
               await axiosInstance.delete("/add-to-cart/clear");
               showSuccess("Order Placed Successfully 🎉");
-              navigate("/"); // Adjusted to /user/profile since /orders might not exist
+              navigate("/");
             } else {
               showError("Payment verification failed");
             }
@@ -164,7 +164,7 @@ const Checkout = () => {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-green-600 uppercase">Fast Delivery</p>
-                  <p className="text-sm text-green-800">3-5 Business days</p>
+                  <p className="text-sm text-green-800">5-7 Business days</p>
                 </div>
               </div>
             </div>
@@ -208,7 +208,7 @@ const Checkout = () => {
               <button
                 onClick={handlePayment}
                 disabled={processing || !cart || cart.items.length === 0}
-                className="w-full bg-black hover:bg-gray-800 text-white py-5 rounded-2xl font-bold text-lg transition-all duration-300 transform active:scale-[0.98] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-3 group shadow-lg shadow-gray-900/10"
+                className="w-full bg-secondary hover:bg-primary text-primary hover:text-secondary hover:border py-5 rounded-2xl font-bold text-lg transition-all duration-300 transform active:scale-[0.98] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-3 group shadow-lg shadow-gray-900/10"
               >
                 {processing ? (
                   <>

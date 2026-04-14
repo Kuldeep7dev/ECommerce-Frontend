@@ -30,6 +30,8 @@ import UserLogin from './Pages/UserLogin'
 import UserProfile from './Pages/UserProfile'
 import UserAddress from './Pages/UserAddress'
 import Checkout from './Pages/Checkout'
+import FAQ from './Pages/FAQ'
+import ContactUs from './Pages/ContactUs'
 
 
 function App() {
@@ -73,13 +75,15 @@ function App() {
             <Route path='/wishlist' element={<Wishlist />} />
             <Route path='/product/:slug' element={<ProductVew />} />
             <Route path='/user/profile' element={<UserProfile />} />
+            <Route path='/faq' element={<FAQ />} />
+            <Route path='/contact-us' element={<ContactUs />} />
+            <Route path='/Checkout' element={<Checkout />} />
           </Route>
 
           <Route path='/login' element={<UserLogin />} />
           <Route path='/signup' element={<UserSignUp />} />
           <Route path='*' element={<NotFound />} />
           <Route path='/address' element={<UserAddress />} />
-          <Route path='/Checkout' element={<Checkout />} />
 
         </Routes>
       </AnimatePresence>
