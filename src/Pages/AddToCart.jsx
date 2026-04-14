@@ -219,7 +219,7 @@ const AddToCart = () => {
                                     </div>
                                 </div>
 
-                                <button className='w-full bg-secondary hover:border text-primary cursor-pointer py-4 rounded-full font-bold text-lg hover:shadow-xl hover:bg-primary hover:text-secondary transition-all duration-300 transform active:scale-95'>
+                                <button onClick={() => navigate('/checkout')} className='w-full bg-secondary hover:border text-primary cursor-pointer py-4 rounded-full font-bold text-lg hover:shadow-xl hover:bg-primary hover:text-secondary transition-all duration-300 transform active:scale-95'>
                                     Checkout Now
                                 </button>
 

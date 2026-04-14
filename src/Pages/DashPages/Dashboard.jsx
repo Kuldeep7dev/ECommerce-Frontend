@@ -154,7 +154,7 @@ const Dashboard = () => {
           <div className='lg:col-span-2 bg-white border border-gray-100 p-6 rounded-3xl shadow-sm hover:shadow-md transition-shadow flex flex-col'>
             <div className='flex items-center justify-between mb-8'>
               <h2 className='font-bold text-lg text-secondary'>Recent Reviews</h2>
-              <button className='text-sm text-accent font-semibold hover:underline'>View all</button>
+              {/* <button className='text-sm text-accent font-semibold hover:underline'>View all</button> */}
             </div>
 
             {recentReviews.length > 0 ? (

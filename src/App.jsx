@@ -29,6 +29,7 @@ import UserSignUp from './Pages/UserSignUp'
 import UserLogin from './Pages/UserLogin'
 import UserProfile from './Pages/UserProfile'
 import UserAddress from './Pages/UserAddress'
+import Checkout from './Pages/Checkout'
 
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
           <Route path='/signup' element={<UserSignUp />} />
           <Route path='*' element={<NotFound />} />
           <Route path='/address' element={<UserAddress />} />
+          <Route path='/Checkout' element={<Checkout />} />
 
         </Routes>
       </AnimatePresence>
