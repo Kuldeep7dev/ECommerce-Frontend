@@ -45,6 +45,7 @@ const Products = () => {
 
   // 🔹 Debounced search
   useEffect(() => {
+    document.title = "Bravima || Admin Product"
     const delay = setTimeout(() => {
       if (searchTerm.trim() === "") {
         fetchProducts(); // show all

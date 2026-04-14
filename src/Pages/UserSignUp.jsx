@@ -38,7 +38,7 @@ const UserSignUp = () => {
     setIsLoading(true);
     try {
 
- 
+
       const res = await axiosInstance.post("/auth/signup", data);
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axiosInstance from '../../Config/AxiosInstance';
 import { showError, showSuccess } from '../../Utils/toaster';
 import BreadCrumb from '../../Component/BreadCrumb';
@@ -13,6 +13,10 @@ const SignUp = () => {
     role: ""
   });
   const navigate = useNavigate()
+
+  useEffect(() => {
+    document.title = "Bravima || Admin Signup"
+  }, [])
 
   const handlePostData = async (para) => {
     para.preventDefault()

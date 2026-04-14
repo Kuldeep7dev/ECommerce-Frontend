@@ -25,7 +25,8 @@ const Users = () => {
   }
 
   useEffect(() => {
-    fetchUsers()
+    fetchUsers();
+    document.title = "Bravima || Admin Users"
   }, []);
 
   const deleteTheUser = async (id) => {
@@ -86,9 +87,9 @@ const Users = () => {
               <tr>
                 <td colSpan="6" className="p-10 text-center text-primary font-bold">
                   <div className="flex justify-center items-center gap-2">
-                <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-                Loading users...
-              </div>
+                    <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                    Loading users...
+                  </div>
                 </td>
               </tr>
             ) : data.length > 0 ? (
@@ -112,8 +113,8 @@ const Users = () => {
                         <Eye size={20} />
                       </Link>
 
-                      <Link 
-                        to={`/users/${user._id}/update`} 
+                      <Link
+                        to={`/users/${user._id}/update`}
                         className="p-2 rounded-xl border-2 bg-accent text-white hover:bg-white hover:text-accent hover:border-accent transition-all shadow-sm"
                       >
                         <Pencil size={20} />

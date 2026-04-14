@@ -35,7 +35,8 @@ const UpdateUsers = () => {
     }
 
     useEffect(() => {
-        fetchUser()
+        fetchUser();
+        document.title = `Bravima || Admin ${data.fullName}`
     }, []);
 
 

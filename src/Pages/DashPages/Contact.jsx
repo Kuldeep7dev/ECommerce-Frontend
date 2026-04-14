@@ -18,6 +18,10 @@ const Contact = () => {
   //   fetchNotification()
   // }, [])
 
+  useEffect(() => {
+    document.title = "Bravima || Admin Contact"
+  })
+
   const breadcrumbItems = [
     { title: "Contact", link: '/contact' }
   ]

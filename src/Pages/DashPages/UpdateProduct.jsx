@@ -43,41 +43,44 @@ const UpdateProduct = () => {
     colour: [],
   });
 
+  const fetchProduct = async () => {
+    try {
+      const res = await axiosInstance.get(`/product/${slug}`);
+      const data = res.data.product || res.data;
+
+      setProduct({
+        productName: data.productName ?? "",
+        stock: data.stock ?? "",
+        price: data.price ?? Number,
+        category:
+          typeof data.category === "object"
+            ? data.category?.name || ""
+            : (data.category ?? ""),
+        colour: data.colour ?? [],
+      });
+      setOriginalProduct({
+        productName: data.productName ?? "",
+        stock: data.stock ?? "",
+        price: data.price ?? Number,
+        category:
+          typeof data.category === "object"
+            ? data.category?.name || ""
+            : (data.category ?? ""),
+        colour: data.colour ?? [],
+        image: data.image ?? [],
+      });
+
+      setExistingImages(data.image ?? []);
+    } catch (error) {
+      toastError("Failed to load product");
+    }
+  };
+
+  if (slug) fetchProduct();
+
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await axiosInstance.get(`/product/${slug}`);
-        const data = res.data.product || res.data;
-
-        setProduct({
-          productName: data.productName ?? "",
-          stock: data.stock ?? "",
-          price: data.price ?? Number,
-          category:
-            typeof data.category === "object"
-              ? data.category?.name || ""
-              : (data.category ?? ""),
-          colour: data.colour ?? [],
-        });
-        setOriginalProduct({
-          productName: data.productName ?? "",
-          stock: data.stock ?? "",
-          price: data.price ?? Number,
-          category:
-            typeof data.category === "object"
-              ? data.category?.name || ""
-              : (data.category ?? ""),
-          colour: data.colour ?? [],
-          image: data.image ?? [],
-        });
-
-        setExistingImages(data.image ?? []);
-      } catch (error) {
-        toastError("Failed to load product");
-      }
-    };
-
-    if (slug) fetchProduct();
+    fetchProduct()
+    document.title = `Bravima || Admin ${slug} `
   }, [slug]);
 
   const handleChange = (e) => {
@@ -190,7 +193,7 @@ const UpdateProduct = () => {
     { title: "Dashboard", link: '/dashboard' },
     { title: "Products", link: '/products' },
     { title: slug, link: `/products/${slug}/view` },
-    {title: 'Update'}
+    { title: 'Update' }
   ]
 
   return (

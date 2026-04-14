@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { LogOutIcon, Pencil, X } from "lucide-react";
 
@@ -19,6 +19,10 @@ const AdminProfile = ({ onClose }) => {
     if (!name) return "U";
     return name.charAt(0).toUpperCase();
   };
+
+  useEffect(() => {
+    document.title = "Bravima || Admin Profile"
+  }, [])
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 backdrop-blur-sm">
 

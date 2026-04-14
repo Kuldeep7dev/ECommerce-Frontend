@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router';
 
 const FAQ = () => {
@@ -8,7 +8,7 @@ const FAQ = () => {
         setOpenIndex(openIndex === index ? null : index);
     };
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         document.title = "Bravima || FAQ"
     }, [])
 

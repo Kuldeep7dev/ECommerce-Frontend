@@ -20,8 +20,9 @@ const ViewProduct = () => {
   }
 
   useEffect(() => {
-    fetchData()
-  }, [slug])
+    fetchData();
+    document.title = `Bravima || Admin ${data.productName} View`
+  }, [slug]);
 
   if (!data) return null
 

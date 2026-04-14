@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axiosInstance from '../Config/AxiosInstance';
 import Pages from '../Component/Global/Pages';
 import { useNavigate } from 'react-router';
@@ -39,6 +39,10 @@ const UserAddress = () => {
             showError("Some problem to add your address");
         }
     };
+
+    useEffect(() => {
+        document.title = "Bravima || Address"
+    }, [])
 
     return (
         <Pages>

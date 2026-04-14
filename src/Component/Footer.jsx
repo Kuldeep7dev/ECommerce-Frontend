@@ -21,7 +21,7 @@ const Footer = () => {
   const help = [
     { title: "About Us", link: "/about" },
     { title: "Contact Us", link: "/contact-us" },
-    { title: "Return Policy", link: "/returns" },
+    { title: "Return Policy", link: "/return-policy" },
     { title: "FAQ", link: "/faq" }
   ];
 

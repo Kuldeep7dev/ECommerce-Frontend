@@ -40,6 +40,7 @@ const Search = () => {
 
   useEffect(() => {
     fetchdata();
+    document.title = "Bravima || Search"
   }, [debouncedSearch]);
 
   return (

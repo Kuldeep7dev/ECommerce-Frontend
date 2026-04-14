@@ -26,9 +26,9 @@ const UserLogin = () => {
       const res = await axiosInstance.post("/auth/login", data);
 
       login(res.data.user);
-      
+
       showSuccess(`Welcome back, ${res.data.user.fullName || 'User'}! ✅`);
-      
+
       if (res.data.user.role === 'admin') {
         navigate('/dashboard');
       } else {

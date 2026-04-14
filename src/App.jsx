@@ -11,7 +11,6 @@ import Search from "./Pages/Search"
 import ProductVew from "./Pages/ProductView"
 import AddToCart from "./Pages/AddToCart"
 import Wishlist from "./Pages/Wishlist"
-import AdminPanel from "./Pages/DashPages/AdminPanel"
 import AdminLayout from "./Layout/AdminLayout"
 import Products from "./Pages/DashPages/Products"
 import Dashboard from "./Pages/DashPages/Dashboard"
@@ -32,6 +31,7 @@ import UserAddress from './Pages/UserAddress'
 import Checkout from './Pages/Checkout'
 import FAQ from './Pages/FAQ'
 import ContactUs from './Pages/ContactUs'
+import ReturnPolicy from './Pages/ReturnPolicy'
 
 
 function App() {
@@ -46,7 +46,6 @@ function App() {
           {/* 🔒 ADMIN ROUTES */}
           <Route element={<ProtectedRoute requiredRole="admin" />}>
             <Route element={<AdminLayout />}>
-              <Route path="/adminpanel" element={<AdminPanel />} />
               <Route path="/products" element={<Products />} />
               <Route path='/dashboard' element={<Dashboard />} />
               <Route path='/users' element={<Users />} />
@@ -78,6 +77,7 @@ function App() {
             <Route path='/faq' element={<FAQ />} />
             <Route path='/contact-us' element={<ContactUs />} />
             <Route path='/Checkout' element={<Checkout />} />
+            <Route path='/return-policy' element={<ReturnPolicy />} />
           </Route>
 
           <Route path='/login' element={<UserLogin />} />

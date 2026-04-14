@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
@@ -15,6 +15,10 @@ const adminHighlights = [
 const UserProfile = () => {
   const { user, isAuthenticated, logout } = useAuth()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    document.title = `Bravima || ${user?.fullName}`
+  }, [])
 
   const displayName = user?.fullName || user?.name || 'Guest User'
   const email = user?.email || 'No email added yet'

@@ -40,7 +40,8 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    fetchDashboardData()
+    fetchDashboardData();
+    document.title = "Bravima || Admin Dashboard"
   }, []);
 
   const dataCount = {

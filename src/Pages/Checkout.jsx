@@ -24,6 +24,7 @@ const Checkout = () => {
       }
     };
     fetchCart();
+    document.title = "Bravima || Checkout"
   }, [navigate]);
 
   // FRONTEND handlePayment FIXED
