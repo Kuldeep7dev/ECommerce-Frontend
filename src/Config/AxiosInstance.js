@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:9090",
+    baseURL: "https://bravimaserver.vercel.app/",
     withCredentials: true,
     headers: {
         "Content-Type": "application/json"
