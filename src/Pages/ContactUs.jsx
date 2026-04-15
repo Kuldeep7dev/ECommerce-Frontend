@@ -2,8 +2,13 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import Pages from '../Component/Global/Pages'
 import axiosInstance from '../Config/AxiosInstance';
 import { showError, showSuccess } from '../Utils/toaster';
-import { Copyright, Heart, Mail, MapPin, Phone, } from 'lucide-react';
-import { RiFacebookFill, RiInstagramFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
+import { Copyright } from 'lucide-react';
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaXTwitter,
+  FaYoutube
+} from "react-icons/fa6";
 import toast from 'react-hot-toast';
 
 const ContactUs = () => {
@@ -86,19 +91,19 @@ const ContactUs = () => {
 
                 <div className="flex items-center gap-4 mb-6">
                   <button onClick={handleMessage} className="w-9 h-9 rounded-full bg-gray-800 text-white flex items-center justify-center cursor-pointer hover:scale-110 duration-200">
-                    <RiFacebookFill size={16} />
+                    <FaFacebookF size={16} />
                   </button>
 
                   <button onClick={handleMessage} className="w-9 h-9 rounded-full bg-gray-800 text-white flex items-center justify-center cursor-pointer hover:scale-110 duration-200">
-                    <RiTwitterXFill size={16} />
+                    <FaXTwitter size={16} />
                   </button>
 
                   <button onClick={handleMessage} className="w-9 h-9 rounded-full bg-gray-800 text-white flex items-center justify-center cursor-pointer hover:scale-110 duration-200">
-                    <RiInstagramFill size={16} />
+                    <FaInstagram size={16} />
                   </button>
 
                   <button onClick={handleMessage} className="w-9 h-9 rounded-full bg-gray-800 text-white flex items-center justify-center cursor-pointer hover:scale-110 duration-200">
-                    <RiYoutubeFill size={16} />
+                    <FaYoutube size={16} />
                   </button>
                 </div>
 

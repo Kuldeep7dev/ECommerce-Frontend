@@ -1,96 +1,100 @@
-import './Index.css'
-import Children from "./Pages/Children"
-import { Routes, Route, useLocation } from "react-router-dom"
-import NotFound from "./Pages/NotFound"
-import WebLayout from "./Layout/WebLayout"
-import Home from "./Pages/Home"
-import Women from "./Pages/WOMEN.JSX"
-import Men from "./Pages/Men"
-import { AnimatePresence } from "framer-motion"
-import Search from "./Pages/Search"
-import ProductVew from "./Pages/ProductView"
-import AddToCart from "./Pages/AddToCart"
-import Wishlist from "./Pages/Wishlist"
-import AdminLayout from "./Layout/AdminLayout"
-import Products from "./Pages/DashPages/Products"
-import Dashboard from "./Pages/DashPages/Dashboard"
-import Users from "./Pages/DashPages/Users"
-import Contact from "./Pages/DashPages/Contact"
-import UpdateProduct from "./Pages/DashPages/UpdateProduct"
-import ViewProduct from "./Pages/DashPages/ViewProduct"
-import ProductUpload from "./Pages/DashPages/ProductUpload"
-import SignUp from './Pages/DashPages/SignUp'
-import ViewUsers from './Pages/DashPages/ViewUsers'
-import ViewContact from './Pages/DashPages/ViewContact'
-import ProtectedRoute from './Component/ProtectedRoute'
-import UpdateUsers from './Pages/DashPages/UpdateUsers'
-import UserSignUp from './Pages/UserSignUp'
-import UserLogin from './Pages/UserLogin'
-import UserProfile from './Pages/UserProfile'
-import UserAddress from './Pages/UserAddress'
-import Checkout from './Pages/Checkout'
-import FAQ from './Pages/FAQ'
-import ContactUs from './Pages/ContactUs'
-import ReturnPolicy from './Pages/ReturnPolicy'
-import About from './Pages/About'
+import { lazy, Suspense } from "react";
+import "./Index.css";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
+/* Layouts */
+const WebLayout = lazy(() => import("./Layout/WebLayout"));
+const AdminLayout = lazy(() => import("./Layout/AdminLayout"));
+const ProtectedRoute = lazy(() => import("./Component/ProtectedRoute"));
+
+/* Public Pages */
+const Home = lazy(() => import("./Pages/Home"));
+const Men = lazy(() => import("./Pages/Men"));
+const Women = lazy(() => import("./Pages/WOMEN.JSX"));
+const Children = lazy(() => import("./Pages/Children"));
+const Search = lazy(() => import("./Pages/Search"));
+const ProductView = lazy(() => import("./Pages/ProductView"));
+const AddToCart = lazy(() => import("./Pages/AddToCart"));
+const Wishlist = lazy(() => import("./Pages/Wishlist"));
+const UserLogin = lazy(() => import("./Pages/UserLogin"));
+const UserSignUp = lazy(() => import("./Pages/UserSignUp"));
+const UserProfile = lazy(() => import("./Pages/UserProfile"));
+const UserAddress = lazy(() => import("./Pages/UserAddress"));
+const Checkout = lazy(() => import("./Pages/Checkout"));
+const FAQ = lazy(() => import("./Pages/FAQ"));
+const ContactUs = lazy(() => import("./Pages/ContactUs"));
+const ReturnPolicy = lazy(() => import("./Pages/ReturnPolicy"));
+const About = lazy(() => import("./Pages/About"));
+const NotFound = lazy(() => import("./Pages/NotFound"));
+
+/* Admin Pages */
+const Products = lazy(() => import("./Pages/DashPages/Products"));
+const Dashboard = lazy(() => import("./Pages/DashPages/Dashboard"));
+const Users = lazy(() => import("./Pages/DashPages/Users"));
+const Contact = lazy(() => import("./Pages/DashPages/Contact"));
+const UpdateProduct = lazy(() => import("./Pages/DashPages/UpdateProduct"));
+const ViewProduct = lazy(() => import("./Pages/DashPages/ViewProduct"));
+const ProductUpload = lazy(() => import("./Pages/DashPages/ProductUpload"));
+const SignUp = lazy(() => import("./Pages/DashPages/SignUp"));
+const ViewUsers = lazy(() => import("./Pages/DashPages/ViewUsers"));
+const ViewContact = lazy(() => import("./Pages/DashPages/ViewContact"));
+const UpdateUsers = lazy(() => import("./Pages/DashPages/UpdateUsers"));
 
 function App() {
   const location = useLocation();
 
-
   return (
-    <div style={{ fontFamily: 'Space Mono' }}>
-      <AnimatePresence>
-        <Routes location={location} key={location.pathname}>
+    <div style={{ fontFamily: "Space Mono" }}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
 
-          {/* 🔒 ADMIN ROUTES */}
-          <Route element={<ProtectedRoute requiredRole="admin" />}>
-            <Route element={<AdminLayout />}>
-              <Route path="/products" element={<Products />} />
-              <Route path='/dashboard' element={<Dashboard />} />
-              <Route path='/users' element={<Users />} />
-
-              <Route path='/contact/:id' element={<ViewContact />} />
-              <Route path="/contact" element={<Contact />} />
-
-              <Route path='/products/:slug/update' element={<UpdateProduct />} />
-              <Route path="/products/:slug/view" element={<ViewProduct />} />
-              <Route path='/upload' element={<ProductUpload />} />
-
-              <Route path='/users/:id' element={<ViewUsers />} />
-              <Route path='/users/:id/update' element={<UpdateUsers />} />
-              <Route path='/users/create' element={<SignUp />} />
+            {/* Admin */}
+            <Route element={<ProtectedRoute requiredRole="admin" />}>
+              <Route element={<AdminLayout />}>
+                <Route path="/products" element={<Products />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/contact/:id" element={<ViewContact />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/products/:slug/update" element={<UpdateProduct />} />
+                <Route path="/products/:slug/view" element={<ViewProduct />} />
+                <Route path="/upload" element={<ProductUpload />} />
+                <Route path="/users/:id" element={<ViewUsers />} />
+                <Route path="/users/:id/update" element={<UpdateUsers />} />
+                <Route path="/users/create" element={<SignUp />} />
+              </Route>
             </Route>
-          </Route>
 
-          {/* 🌐 WEB LAYOUT */}
-          <Route element={<WebLayout />}>
-            <Route path='/' element={<Home />} />
-            <Route path='/men' element={<Men />} />
-            <Route path='/women' element={<Women />} />
-            <Route path='/children' element={<Children />} />
-            <Route path='/search' element={<Search />} />
-            <Route path='/cart' element={<AddToCart />} />
-            <Route path='/wishlist' element={<Wishlist />} />
-            <Route path='/product/:slug' element={<ProductVew />} />
-            <Route path='/user/profile' element={<UserProfile />} />
-            <Route path='/faq' element={<FAQ />} />
-            <Route path='/contact-us' element={<ContactUs />} />
-            <Route path='/Checkout' element={<Checkout />} />
-            <Route path='/return-policy' element={<ReturnPolicy />} />
-            <Route path='/about-us' element={<About />} />
-          </Route>
+            {/* Website */}
+            <Route element={<WebLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/men" element={<Men />} />
+              <Route path="/women" element={<Women />} />
+              <Route path="/children" element={<Children />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/cart" element={<AddToCart />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/product/:slug" element={<ProductView />} />
+              <Route path="/user/profile" element={<UserProfile />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/return-policy" element={<ReturnPolicy />} />
+              <Route path="/about-us" element={<About />} />
+            </Route>
 
-          <Route path='/login' element={<UserLogin />} />
-          <Route path='/signup' element={<UserSignUp />} />
-          <Route path='*' element={<NotFound />} />
-          <Route path='/address' element={<UserAddress />} />
+            <Route path="/login" element={<UserLogin />} />
+            <Route path="/signup" element={<UserSignUp />} />
+            <Route path="/address" element={<UserAddress />} />
+            <Route path="*" element={<NotFound />} />
 
-        </Routes>
-      </AnimatePresence>
+          </Routes>
+        </AnimatePresence>
+      </Suspense>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
