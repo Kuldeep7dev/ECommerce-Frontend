@@ -62,7 +62,7 @@ const Children = () => {
                 <div className="max-w-7xl mx-auto px-6 mb-12">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
                         <div>
-                            <motion.h1 
+                            <motion.h1
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 className="text-4xl md:text-6xl font-black text-[#10100e] tracking-tighter mb-2"
@@ -99,13 +99,13 @@ const Children = () => {
                         <>
                             {/* EMPTY */}
                             {data.length === 0 ? (
-                                <motion.div 
+                                <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     className="text-center py-40 border-2 border-dashed border-gray-100 rounded-[3rem]"
                                 >
                                     <p className="text-gray-400 text-lg font-medium">No products found for this collection</p>
-                                    <button 
+                                    <button
                                         onClick={() => setSearch("")}
                                         className="mt-4 text-[#16A34A] font-bold text-sm underline decoration-accent/30"
                                     >
@@ -114,7 +114,7 @@ const Children = () => {
                                 </motion.div>
                             ) : (
                                 /* GRID */
-                                <motion.div 
+                                <motion.div
                                     variants={containerVariants}
                                     initial="hidden"
                                     animate="visible"
@@ -131,14 +131,14 @@ const Children = () => {
                                                 {/* Image Workspace */}
                                                 <div className="relative aspect-[4/5] overflow-hidden bg-gray-50">
                                                     <img
-                                                        src={`http://localhost:9090/${product.image[0]}`}
+                                                        src={`https://bravimaserver.vercel.app/${product.image[0]}`}
                                                         alt={product.productName}
                                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                                     />
-                                                    
+
                                                     {/* Quick Actions Overlay */}
                                                     <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                                                        <Link 
+                                                        <Link
                                                             to={`/product/${product.slug}`}
                                                             className="p-3 bg-white rounded-full text-[#10100e] hover:bg-[#16A34A] hover:text-white transition-colors shadow-lg"
                                                         >
@@ -165,19 +165,19 @@ const Children = () => {
                                                         ))}
                                                         <span className="text-[10px] text-gray-400 ml-1 font-medium">(4.7)</span>
                                                     </div>
-                                                    
+
                                                     <h3 className="text-sm font-black text-[#10100e] mb-2 line-clamp-1 group-hover:text-[#16A34A] transition-colors">
                                                         {product.productName}
                                                     </h3>
-                                                    
+
                                                     <div className="mt-auto flex justify-between items-center">
                                                         <p className="text-lg font-black text-[#10100e]">
                                                             ₹{product.price.toLocaleString()}
                                                         </p>
                                                         <div className="flex -space-x-1">
                                                             {product.colour?.slice(0, 3).map((c, index) => (
-                                                                <div 
-                                                                    key={index} 
+                                                                <div
+                                                                    key={index}
                                                                     className="w-3 h-3 rounded-full border border-white shadow-sm"
                                                                     style={{ backgroundColor: c }}
                                                                 />

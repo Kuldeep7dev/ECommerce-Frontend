@@ -128,7 +128,7 @@ const Checkout = () => {
                   <div key={item.productId._id} className="flex gap-4">
                     <div className="w-20 h-20 bg-gray-100 rounded-2xl overflow-hidden flex-shrink-0">
                       <img
-                        src={`http://localhost:9090/${item.productId.image?.[0]}`}
+                        src={`https://bravimaserver.vercel.app/${item.productId.image?.[0]}`}
                         alt={item.productId.productName}
                         className="w-full h-full object-cover"
                       />

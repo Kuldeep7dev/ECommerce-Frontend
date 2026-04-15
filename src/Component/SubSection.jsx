@@ -36,7 +36,7 @@ const SubSection = () => {
 
                   {/* IMAGE */}
                   <img
-                    src={`http://localhost:9090/${pro.image[0]}`}
+                    src={`https://bravimaserver.vercel.app/${pro.image[0]}`}
                     alt={pro.productName}
                     className="w-full h-48 p-2"
                   />

@@ -135,7 +135,7 @@ const AddToCart = () => {
                                     {/* Product Image */}
                                     <div className='w-full sm:w-32 h-32 bg-gray-50 rounded-xl flex-shrink-0 flex items-center justify-center'>
                                         <img
-                                            src={`http://localhost:9090/${item.productId.image?.[0]}`}
+                                            src={`https://bravimaserver.vercel.app/${item.productId.image?.[0]}`}
                                             alt={item.productId.productName}
                                             className='max-w-full max-h-full object-contain'
                                         />

@@ -131,7 +131,7 @@ const Men = () => {
                                                 {/* Image Workspace */}
                                                 <div className="relative aspect-[4/5] overflow-hidden bg-gray-50">
                                                     <img
-                                                        src={`http://localhost:9090/${product.image[0]}`}
+                                                        src={`https://bravimaserver.vercel.app/${product.image[0]}`}
                                                         alt={product.productName}
                                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                                     />

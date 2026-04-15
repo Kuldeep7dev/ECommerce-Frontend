@@ -133,7 +133,7 @@ const ProductVew = () => {
             {/* IMAGE */}
             <div className="flex justify-center items-center rounded-xl p-6">
               <img
-                src={`http://localhost:9090/${productView?.image?.[0]}`}
+                src={`https://bravimaserver.vercel.app/${productView?.image?.[0]}`}
                 alt={productView.productName}
                 className="w-full max-w-md object-contain"
               />
@@ -288,7 +288,7 @@ const ProductVew = () => {
 
                     {/* IMAGE */}
                     <img
-                      src={`http://localhost:9090/${men.image?.[0]}`}
+                      src={`https://bravimaserver.vercel.app/${men.image?.[0]}`}
                       alt={men?.productName}
                       className="w-full h-48 p-2"
                     />

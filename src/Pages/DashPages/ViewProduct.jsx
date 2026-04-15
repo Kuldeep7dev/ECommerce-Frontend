@@ -44,7 +44,7 @@ const ViewProduct = () => {
           <div>
             {selectedImage && (
               <img
-                src={`http://localhost:9090/${selectedImage}`}
+                src={`https://bravimaserver.vercel.app/${selectedImage}`}
                 alt={data.productName}
                 className="w-full h-[420px] object-cover rounded-lg border"
               />
@@ -54,7 +54,7 @@ const ViewProduct = () => {
               {data.image?.map((img, index) => (
                 <img
                   key={index}
-                  src={`http://localhost:9090/${img}`}
+                  src={`https://bravimaserver.vercel.app/${img}`}
                   onClick={() => setSelectedImage(img)}
                   className={`w-20 h-20 object-cover rounded cursor-pointer border ${selectedImage === img ? 'border-black' : 'border-gray-300'
                     }`}

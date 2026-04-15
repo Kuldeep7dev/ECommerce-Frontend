@@ -79,7 +79,7 @@ const Search = () => {
                   {/* IMAGE */}
                   <div className="overflow-hidden">
                     <img
-                      src={`http://localhost:9090/${pro.image[0]}`}
+                      src={`https://bravimaserver.vercel.app/${pro.image[0]}`}
                       alt={pro.productName}
                       className="w-full h-52 object-cover transition duration-500"
                     />

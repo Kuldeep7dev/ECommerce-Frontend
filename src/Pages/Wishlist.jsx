@@ -117,7 +117,7 @@ const Wishlist = () => {
                 {/* Image */}
                 <div className="h-52 flex items-center justify-center p-4">
                   <img
-                    src={`http://localhost:9090/${item.productId.image?.[0]}`}
+                    src={`https://bravimaserver.vercel.app/${item.productId.image?.[0]}`}
                     alt={item.productId.productName}
                     className="h-full object-contain transition"
                   />
