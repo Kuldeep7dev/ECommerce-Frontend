@@ -13,7 +13,7 @@ export function timeAgo(timestamp) {
         return seconds + " seconds ago";
     } else if (minutes < 60) {
         return minutes + " minutes ago";
-    } else if (hours < 24) {w
+    } else if (hours < 24) {
         return hours + " hours ago";
     } else {
         return days + " days ago";
