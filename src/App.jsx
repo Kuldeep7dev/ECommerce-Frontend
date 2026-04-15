@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import "./Index.css";
+import "./index.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
@@ -11,7 +11,7 @@ const ProtectedRoute = lazy(() => import("./Component/ProtectedRoute"));
 /* Public Pages */
 const Home = lazy(() => import("./Pages/Home"));
 const Men = lazy(() => import("./Pages/Men"));
-const Women = lazy(() => import("./Pages/WOMEN.JSX"));
+const Women = lazy(() => import("./Pages/Women"));
 const Children = lazy(() => import("./Pages/Children"));
 const Search = lazy(() => import("./Pages/Search"));
 const ProductView = lazy(() => import("./Pages/ProductView"));
