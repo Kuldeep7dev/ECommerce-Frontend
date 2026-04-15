@@ -21,8 +21,6 @@ export default defineConfig({
           react: ['react', 'react-dom', 'react-router-dom'],
           motion: ['framer-motion'],
           axios: ['axios'],
-          firebase: ['firebase'],
-          icons: ['remixicon']
         }
       }
     }
