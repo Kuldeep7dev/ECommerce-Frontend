@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Copyright } from 'lucide-react';
 import { RiFacebookFill, RiInstagramFill, RiTwitterXFill, RiYoutubeFill } from '@remixicon/react';
+import toast from 'react-hot-toast';
 // Facebook, Twitter, Instagram, Youtube,
 
 const Footer = () => {
@@ -19,7 +20,7 @@ const Footer = () => {
   ];
 
   const help = [
-    { title: "About Us", link: "/about" },
+    { title: "About Us", link: "/about-us" },
     { title: "Contact Us", link: "/contact-us" },
     { title: "Return Policy", link: "/return-policy" },
     { title: "FAQ", link: "/faq" }
@@ -29,6 +30,10 @@ const Footer = () => {
   const email = 'kushallaxkar9@gmail.com'
   const openWhatsapp = () => {
     window.open(`https://wa.me/${phoneNumber}`)
+  }
+
+  const handleMessage = async () => {
+    toast("Coming soon")
   }
 
   return (
@@ -138,8 +143,8 @@ const Footer = () => {
             <Copyright size={15} /> {new Date().getFullYear()} <span style={{ fontFamily: "Dancing Script" }}>Bravima</span>. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <Link to="/terms" className="opacity-70 hover:opacity-100 hover:underline text-sm transition-opacity duration-300">Terms of Service</Link>
-            <Link to="/privacy" className="opacity-70 hover:opacity-100 hover:underline text-sm transition-opacity duration-300">Privacy Policy</Link>
+            <button onClick={handleMessage} to="/terms" className="opacity-70 hover:opacity-100 hover:underline text-sm transition-opacity duration-300">Terms of Service</button>
+            <button onClick={handleMessage} to="/privacy" className="opacity-70 hover:opacity-100 hover:underline text-sm transition-opacity duration-300">Privacy Policy</button>
           </div>
         </div>
       </div>

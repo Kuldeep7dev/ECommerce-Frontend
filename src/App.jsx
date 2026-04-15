@@ -32,6 +32,7 @@ import Checkout from './Pages/Checkout'
 import FAQ from './Pages/FAQ'
 import ContactUs from './Pages/ContactUs'
 import ReturnPolicy from './Pages/ReturnPolicy'
+import About from './Pages/About'
 
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
             <Route path='/contact-us' element={<ContactUs />} />
             <Route path='/Checkout' element={<Checkout />} />
             <Route path='/return-policy' element={<ReturnPolicy />} />
+            <Route path='/about-us' element={<About />} />
           </Route>
 
           <Route path='/login' element={<UserLogin />} />
