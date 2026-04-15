@@ -63,7 +63,7 @@ const SubHomePages = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-black text-[#10100e] tracking-tight"
+            className="text-3xl md:text-5xl lg:text-6xl font-black text-[#10100e] tracking-tight"
           >
             Trending <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#10100e] to-gray-400">Products</span>
           </motion.h2>

@@ -72,7 +72,13 @@ const UserSignUp = () => {
 
   return (
     <Pages>
-      <div className='flex justify-center items-center h-screen bg-secondary px-4 py-12'>
+      <div className='flex justify-center items-center h-screen bg-secondary px-4 py-12 relative'>
+        {/* LOGO */}
+        <div className="absolute top-6 left-6 md:top-8 md:left-10 z-50">
+          <a href='/' className='text-3xl font-bold text-primary hover:text-accent transition-colors' style={{ fontFamily: 'Dancing Script' }}>
+            bravima
+          </a>
+        </div>
         <div className='w-full max-w-xl bg-primary shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] rounded-4xl p-8 sm:p-12 border border-gray-100 relative overflow-hidden'>
 
           {/* Subtle Background Decoration */}

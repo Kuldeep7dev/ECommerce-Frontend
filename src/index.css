@@ -14,6 +14,7 @@
 
 body {
   background: var(--secondary-color);
+  overflow-x: hidden;
 }
 
 ::selection {

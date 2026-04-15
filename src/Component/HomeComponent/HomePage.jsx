@@ -50,7 +50,7 @@ const HomePage = () => {
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-5xl md:text-8xl font-black tracking-tighter mb-6 leading-[0.9]"
+                        className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter mb-6 leading-[1.1] md:leading-[0.9]"
                     >
                         THE FUTURE OF <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#10100e] to-gray-400">FASHION</span>
@@ -99,7 +99,7 @@ const HomePage = () => {
                                 {/* Content Overlay */}
                                 <div className="absolute inset-x-0 bottom-0 p-8 md:p-10 flex flex-col justify-end bg-gradient-to-t from-black/20 to-transparent">
                                     <div className="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-700 ease-[0.16, 1, 0.3, 1]">
-                                        <h2 className="text-4xl md:text-5xl font-black text-white mb-4 drop-shadow-sm">
+                                        <h2 className="text-3xl md:text-5xl font-black text-white mb-4 drop-shadow-sm">
                                             {category.title.split("'")[0]}<span className="opacity-50">'s</span>
                                         </h2>
                                         <p className="text-white/80 mb-8 max-w-xs font-semibold text-base leading-relaxed">

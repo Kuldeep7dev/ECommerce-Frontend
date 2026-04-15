@@ -1,4 +1,4 @@
-import { Heart, Search, ShoppingBasket, User } from 'lucide-react'
+import { Heart, Search, ShoppingBasket, User, Menu, X } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { CATEGORY } from '../Constent/product'
@@ -9,6 +9,7 @@ const Navbar = () => {
     const { isAuthenticated } = useAuth()
     const [count, setCount] = useState({ items: [] })
     const [wishCount, setWishCount] = useState({ items: [] })
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const navigate = useNavigate()
 
     // ✅ NavLink styles
@@ -65,15 +66,15 @@ const Navbar = () => {
     }
 
     return (
-        <nav className='fixed top-4 left-0 right-0 z-50 p-2 flex justify-around items-center text-primary mx-10 rounded-xl bg-secondary'>
+        <nav className='fixed top-4 left-0 right-0 z-50 p-2 flex justify-between md:justify-around items-center text-primary mx-4 md:mx-10 rounded-xl bg-secondary'>
 
             {/* LOGO */}
             <NavLink to='/' className='text-2xl font-bold' style={{ fontFamily: 'Dancing Script' }}>
                 bravima
             </NavLink>
 
-            {/* MENU */}
-            <div className='flex gap-5 text-sm'>
+            {/* DESKTOP MENU */}
+            <div className='hidden md:flex gap-5 text-sm'>
                 <NavLink to='/men' className={navLinkClass}>{CATEGORY.MEN}</NavLink>
                 <NavLink to='/women' className={navLinkClass}>{CATEGORY.WOMEN}</NavLink>
                 <NavLink to='/children' className={navLinkClass}>{CATEGORY.CHILDREN}</NavLink>
@@ -137,7 +138,34 @@ const Navbar = () => {
                         </Link>
                     </div>
                 )}
+                
+                {/* HAMBURGER ICON FOR MOBILE */}
+                <button
+                    className='md:hidden p-2 flex items-center justify-center hover:text-accent'
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
             </div>
+
+            {/* MOBILE MENU */}
+            {isMenuOpen && (
+                <div className='absolute top-full left-0 right-0 mt-2 bg-secondary rounded-xl shadow-lg p-4 flex flex-col gap-4 md:hidden'>
+                    <NavLink to='/men' className={navLinkClass} onClick={() => setIsMenuOpen(false)}>{CATEGORY.MEN}</NavLink>
+                    <NavLink to='/women' className={navLinkClass} onClick={() => setIsMenuOpen(false)}>{CATEGORY.WOMEN}</NavLink>
+                    <NavLink to='/children' className={navLinkClass} onClick={() => setIsMenuOpen(false)}>{CATEGORY.CHILDREN}</NavLink>
+                    {!isAuthenticated && (
+                        <div className='flex flex-col gap-2 mt-2 border-t border-primary/20 pt-4'>
+                            <Link to="/signup" className='text-center border text-secondary bg-primary rounded-xl px-3 py-2' onClick={() => setIsMenuOpen(false)}>
+                                SignUp
+                            </Link>
+                            <Link to="/login" className='text-center border text-secondary bg-primary rounded-xl px-3 py-2' onClick={() => setIsMenuOpen(false)}>
+                                Login
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            )}
         </nav>
     )
 }

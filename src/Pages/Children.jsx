@@ -65,7 +65,7 @@ const Children = () => {
                             <motion.h1
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="text-4xl md:text-6xl font-black text-[#10100e] tracking-tighter mb-2"
+                                className="text-3xl md:text-5xl lg:text-6xl font-black text-[#10100e] tracking-tighter mb-2"
                             >
                                 KIDS' <span className="text-gray-400">COLLECTION</span>
                             </motion.h1>
