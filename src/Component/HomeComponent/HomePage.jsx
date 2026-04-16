@@ -9,7 +9,7 @@ const HomePage = () => {
             id: 'men',
             title: "Men's Collection",
             subtitle: "Uncompromising Style & Precision",
-            image: "/Men1.png",
+            image: "/Men1-removebg-preview.png",
             link: "/men",
             color: "from-blue-900/40"
         },
@@ -17,7 +17,7 @@ const HomePage = () => {
             id: 'women',
             title: "Women's Collection",
             subtitle: "Elegance in Every Detail",
-            image: "/women1.png",
+            image: "/Women1-removebg-preview.png",
             link: "/women",
             color: "from-rose-900/40"
         },
@@ -25,7 +25,7 @@ const HomePage = () => {
             id: 'kids',
             title: "Kids' Collection",
             subtitle: "Playful Comfort & Joy",
-            image: "/kid1.png",
+            image: "/Children1-removebg-preview.png",
             link: "/children",
             color: "from-amber-900/40"
         }
