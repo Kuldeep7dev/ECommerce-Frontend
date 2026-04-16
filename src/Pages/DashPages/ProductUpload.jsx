@@ -78,9 +78,9 @@ const ProductUpload = () => {
     if (!data.brand) {
       return showError("please add the brand name");
     }
-    if (data.colour.length === 0) {
-      return showError("Please add at least one colour");
-    }
+    // if (data.colour.length === 0) {
+    //   return showError("Please add at least one colour");
+    // }
 
     let uploadedImagesUrls = [];
     const validImages = images.filter((img) => img !== null);
@@ -120,15 +120,18 @@ const ProductUpload = () => {
     }
   };
 
-  const breadcrumbItems = [{ title: "Upload" }];
+  const breadcrumbItems = [
+    {title: "Products", link: '/products'},
+    { title: "Upload" }
+  ];
 
   return (
     <div>
-      <div className="mt-2">
+      <div className="py-5">
         <BreadCrumb items={breadcrumbItems} />
       </div>
 
-      <div className="flex flex-col items-center justify-center p-4 border mt-5 rounded-xl">
+      <div className="flex flex-col items-center justify-center p-4 border rounded-xl">
         <div className="w-full rounded-2xl">
           <h2 className="text-2xl font-bold mb-8">Upload Product</h2>
 

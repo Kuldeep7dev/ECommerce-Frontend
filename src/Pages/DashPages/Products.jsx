@@ -130,7 +130,7 @@ const Products = () => {
                 <tr key={item._id} className="text-center">
                   <td className="p-3 border">
                     <img
-                      src={`https://bravimaserver.vercel.app/${item.image[0]}`}
+                      src={`https://bravimaserver.vercel.app/${item.image[1]}`}
                       alt={item.productName}
                       className="w-16 h-16 object-cover mx-auto"
                     />
