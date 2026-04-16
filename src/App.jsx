@@ -46,7 +46,12 @@ function App() {
 
   return (
     <div style={{ fontFamily: "Space Mono" }}>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-white z-[9999]">
+        <div className="relative w-16 h-16">
+          <div className="absolute inset-0 rounded-full border-4 border-gray-200"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-black border-t-transparent animate-spin"></div>
+        </div>
+      </div>}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
 
