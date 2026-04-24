@@ -129,7 +129,7 @@ const Navbar = () => {
                     </>
                 ) : (
                     /* ❌ NOT LOGGED IN */
-                    <div className='flex gap-2'>
+                    <div className='hidden md:flex gap-2'>
                         <Link to="/signup" className='border text-secondary bg-primary rounded-xl px-3 py-1'>
                             SignUp
                         </Link>
@@ -138,7 +138,7 @@ const Navbar = () => {
                         </Link>
                     </div>
                 )}
-                
+
                 {/* HAMBURGER ICON FOR MOBILE */}
                 <button
                     className='md:hidden p-2 flex items-center justify-center hover:text-accent'
